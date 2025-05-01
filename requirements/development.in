@@ -2,6 +2,7 @@
 
 build
 pip-compile-multi
+pre-commit
 pytest
 pytest-cov
 pytest-dotenv
