@@ -1,0 +1,31 @@
+[project]
+name = "p3Materials"
+dynamic = ["version"]
+keywords = ["Persona 3 Reload", "API", "DB"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: Implementation",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+authors = [{ email = "dmitriyvasil@gmail.com" }]
+maintainers = [{ email = "dmitriyvasil@gmail.com" }]
+description = "Database for Persona 3 Reload enemies, items, and materials."
+
+requires-python = ">=3.9"
+dependencies = ["alembic>=1.1", "sqlalchemy>=2.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "p3Materials/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["p3Materials"]
