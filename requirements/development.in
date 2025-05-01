@@ -1,0 +1,7 @@
+-r base.in
+
+build
+pip-compile-multi
+pytest
+pytest-cov
+pytest-dotenv
