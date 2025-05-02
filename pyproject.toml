@@ -14,6 +14,9 @@ authors = [{ email = "dmitriyvasil@gmail.com" }]
 maintainers = [{ email = "dmitriyvasil@gmail.com" }]
 description = "Database for Persona 3 Reload enemies, items, and materials."
 
+license = "MIT License"
+license-files = ["LICENSE"]
+
 requires-python = ">=3.9"
 dependencies = ["alembic>=1.1", "sqlalchemy>=2.0", "click>=8.0"]
 
