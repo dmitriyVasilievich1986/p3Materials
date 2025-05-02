@@ -38,32 +38,36 @@ class Shadow(Base):
     )
 
     # resistances
-    slash: int = Column(
+    slash: DamageMultiplier = Column(
         Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
     )
-    strike: int = Column(
+    strike: DamageMultiplier = Column(
         Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
     )
-    pierce: int = Column(
-        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
-    )
-
-    fire: int = Column(
-        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
-    )
-    ice: int = Column(
-        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
-    )
-    lightning: int = Column(
-        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
-    )
-    wind: int = Column(
+    pierce: DamageMultiplier = Column(
         Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
     )
 
-    light: int = Column(
+    fire: DamageMultiplier = Column(
         Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
     )
-    darkness: int = Column(
+    ice: DamageMultiplier = Column(
         Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
     )
+    lightning: DamageMultiplier = Column(
+        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
+    )
+    wind: DamageMultiplier = Column(
+        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
+    )
+
+    light: DamageMultiplier = Column(
+        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
+    )
+    darkness: DamageMultiplier = Column(
+        Enum(DamageMultiplier), default=DamageMultiplier.Normal, nullable=False
+    )
+
+    def __str__(self):
+        floors = ", ".join([str(floor.id) for floor in self.floors])
+        return f'Shadow("{self.name}" [slash={self.slash.value} | strike={self.strike.value} | pierce={self.pierce.value} | fire={self.fire.value} | ice={self.ice.value} | lightning={self.lightning.value} | wind={self.wind.value} | light={self.light.value} | darkness={self.darkness.value}] floors=[{floors}])'

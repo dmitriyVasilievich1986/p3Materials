@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import Mapped, relationship
 
 from p3Materials.models.base import Base
+from p3Materials.models.craft import Craft, material_craft_table
 
 if TYPE_CHECKING:
     from p3Materials.models.shadow import Shadow
@@ -27,3 +28,9 @@ class Material(Base):
     shadows: Mapped[list["Shadow"]] = relationship(
         secondary=material_shadow_table, back_populates="materials"
     )
+    crafts: Mapped[list[Craft]] = relationship(
+        secondary=material_craft_table, back_populates="materials"
+    )
+
+    def __str__(self) -> str:
+        return f'Material("{self.name}", price={self.price})'

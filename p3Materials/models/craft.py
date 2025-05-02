@@ -35,3 +35,9 @@ class Craft(Base):
     materials: Mapped[list["Material"]] = relationship(
         secondary=material_craft_table, back_populates="crafts"
     )
+
+    def __str__(self) -> str:
+        b = f" buff={self.buff}" if self.buff else ""
+        s = f" stats={self.stats}" if self.stats else ""
+        d = f" description={self.description}" if self.description else ""
+        return f'Craft({self.type} - "{self.name}"{s}{b}{d})'
