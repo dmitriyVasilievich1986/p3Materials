@@ -11,6 +11,9 @@ class DamageMultiplier(Enum):
 
 
 class CraftType(Enum):
+    Consumables = "Consumables"
     Accessory = "Accessory"
     Weapon = "Weapon"
     Armor = "Armor"
+    Boots = "Boots"
+    Card = "Card"
