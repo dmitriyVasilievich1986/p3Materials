@@ -8,3 +8,9 @@ class DamageMultiplier(Enum):
     Normal = "Normal"
     Weak = "Weak"
     Null = "Null"
+
+
+class CraftType(Enum):
+    Accessory = "Accessory"
+    Weapon = "Weapon"
+    Armor = "Armor"
