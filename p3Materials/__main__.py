@@ -45,8 +45,12 @@ def get_materials(
     materials = (
         session.query(Material)
         .join(material_shadow_table, Material.id == material_shadow_table.c.material_id)
-        .join(Shadow, Shadow.id == material_shadow_table.c.shadow_id)
-        .join(floor_shadow_table, Shadow.id == floor_shadow_table.c.shadow_id)
+        .join(Shadow, Shadow.id == material_shadow_table.c.shadow_id, isouter=True)
+        .join(
+            floor_shadow_table,
+            Shadow.id == floor_shadow_table.c.shadow_id,
+            isouter=True,
+        )
         .filter(
             and_(
                 floor_shadow_table.c.floor_id.in_(floors) if floors else true,
@@ -62,11 +66,23 @@ def get_materials(
 def get_crafts(session: Session, floors: tuple[int], names: tuple[str]) -> list[Craft]:
     crafts = (
         session.query(Craft)
-        .join(material_craft_table, Craft.id == material_craft_table.c.craft_id)
-        .join(Material, Material.id == material_craft_table.c.material_id)
-        .join(material_shadow_table, Material.id == material_shadow_table.c.material_id)
-        .join(Shadow, Shadow.id == material_shadow_table.c.shadow_id)
-        .join(floor_shadow_table, Shadow.id == floor_shadow_table.c.shadow_id)
+        .join(
+            material_craft_table,
+            Craft.id == material_craft_table.c.craft_id,
+            isouter=True,
+        )
+        .join(Material, Material.id == material_craft_table.c.material_id, isouter=True)
+        .join(
+            material_shadow_table,
+            Material.id == material_shadow_table.c.material_id,
+            isouter=True,
+        )
+        .join(Shadow, Shadow.id == material_shadow_table.c.shadow_id, isouter=True)
+        .join(
+            floor_shadow_table,
+            Shadow.id == floor_shadow_table.c.shadow_id,
+            isouter=True,
+        )
         .filter(
             and_(
                 floor_shadow_table.c.floor_id.in_(floors) if floors else true,
