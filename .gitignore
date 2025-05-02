@@ -4,6 +4,7 @@ __pycache__
 *egg-info
 .coverage
 *.sqlite
+*.ipynb
 .vscode
 *.pyc
 dist
