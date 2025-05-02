@@ -33,4 +33,5 @@ class Material(Base):
     )
 
     def __str__(self) -> str:
-        return f'Material("{self.name}", price={self.price})'
+        price = f" ¥{self.price:_}" if self.price > 0 else ""
+        return f'Material("{self.name}"{price})'

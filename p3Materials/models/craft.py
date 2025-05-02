@@ -37,7 +37,7 @@ class Craft(Base):
     )
 
     def __str__(self) -> str:
-        b = f" buff={self.buff}" if self.buff else ""
-        s = f" stats={self.stats}" if self.stats else ""
-        d = f" description={self.description}" if self.description else ""
-        return f'Craft({self.type} - "{self.name}"{s}{b}{d})'
+        b = f' effect="{self.buff}"' if self.buff else ""
+        s = f" stats={{{self.stats}}}" if self.stats else ""
+        d = f' description="{self.description}"' if self.description else ""
+        return f'Craft({self.type.value} - "{self.name}"{s}{b}{d})'
