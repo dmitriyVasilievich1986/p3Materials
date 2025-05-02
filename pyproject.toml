@@ -27,6 +27,9 @@ path = "p3Materials/__init__.py"
 [tool.hatch.build.targets.wheel]
 packages = ["p3Materials"]
 
+[project.scripts]
+p3Materials = "p3Materials.__main__:main"
+
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
