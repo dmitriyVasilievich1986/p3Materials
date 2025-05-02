@@ -28,6 +28,7 @@ class Shadow(Base):
 
     id: int = Column(Integer, primary_key=True)
     name: str = Column(String(255), nullable=False)
+    stats: str = Column(String(255), nullable=True)
     arcana: int = Column(Integer, nullable=False)
 
     floors: Mapped[list[Floor]] = relationship(
