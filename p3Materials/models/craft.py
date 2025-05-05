@@ -1,10 +1,10 @@
 from typing import TYPE_CHECKING, TypedDict
 
+from flask_appbuilder import Model
 from sqlalchemy import Column, Enum, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import Mapped, relationship
 
 from p3Materials.constants import CraftType
-from p3Materials.models.base import Base
 
 if TYPE_CHECKING:
     from p3Materials.models.material import Material
@@ -25,7 +25,7 @@ class BootsStats(TypedDict):
 
 material_craft_table = Table(
     "material_craft_table",
-    Base.metadata,
+    Model.metadata,
     Column("id", Integer, primary_key=True),
     Column("count", Integer, nullable=False, default=1),
     Column("craft_id", ForeignKey("craft.id"), primary_key=True),
@@ -33,7 +33,7 @@ material_craft_table = Table(
 )
 
 
-class Craft(Base):
+class Craft(Model):
     __tablename__ = "craft"
 
     id: int = Column(Integer, primary_key=True)
@@ -46,7 +46,7 @@ class Craft(Base):
     type: CraftType = Column(Enum(CraftType), default=CraftType.Weapon, nullable=False)
 
     materials: Mapped[list["Material"]] = relationship(
-        secondary=material_craft_table, back_populates="crafts"
+        "Material", secondary=material_craft_table, back_populates="crafts"
     )
 
     def __str__(self) -> str:
