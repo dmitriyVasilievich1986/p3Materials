@@ -1,9 +1,18 @@
+from typing import TypedDict
+
 from sqlalchemy import Column, Enum, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import Mapped, relationship
 
 from p3Materials.constants import DamageMultiplier
 from p3Materials.models.base import Base
 from p3Materials.models.material import Material, material_shadow_table
+
+
+class ShadowStats(TypedDict):
+    Level: int
+    HP: int
+    SP: int
+
 
 floor_shadow_table = Table(
     "floor_shadow_table",

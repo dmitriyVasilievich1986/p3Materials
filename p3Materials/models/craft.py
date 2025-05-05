@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, TypedDict
 
 from sqlalchemy import Column, Enum, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import Mapped, relationship
@@ -8,6 +8,19 @@ from p3Materials.models.base import Base
 
 if TYPE_CHECKING:
     from p3Materials.models.material import Material
+
+
+class WeaponStats(TypedDict):
+    Attack: int
+    Accuracy: int
+
+
+class ArmorStats(TypedDict):
+    Defense: int
+
+
+class BootsStats(TypedDict):
+    Evasion: int
 
 
 material_craft_table = Table(
