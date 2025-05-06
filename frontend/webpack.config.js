@@ -11,8 +11,16 @@ module.exports = (env, argv) => {
     entry: {
       main: path.resolve(__dirname, "src/index.js"),
     },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js", ".jsx"],
+    },
     module: {
       rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: ["ts-loader"],
+        },
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
