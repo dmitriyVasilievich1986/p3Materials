@@ -2,7 +2,7 @@ from flask import Flask
 
 from p3Materials import appbuilder, db
 from p3Materials.api import CraftModelApi, MaterialModelApi, ShadowModelApi
-from p3Materials.views import P3IndexView
+from p3Materials.views import P3IndexView, ShadowView
 
 
 def create_app() -> Flask:
@@ -20,6 +20,7 @@ def create_app() -> Flask:
         appbuilder.add_api(CraftModelApi)
         appbuilder.add_api(ShadowModelApi)
         appbuilder.add_api(MaterialModelApi)
+        appbuilder.add_view(ShadowView, "Shadow", category="Shadow")
         appbuilder.add_permissions(update_perms=True)
         appbuilder.sm.lm.login_view = "AuthDBView.login"
 

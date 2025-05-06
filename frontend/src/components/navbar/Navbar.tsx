@@ -18,9 +18,17 @@ function Navbar() {
       <Toolbar>
         <Container maxWidth="md">
           <Box className={cx("navbar-container")}>
-            <NavLink to="/" className={cx("navlink")}>
+            <NavLink to="/" className={(isActive) => cx("navlink", isActive)}>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 Home
+              </Typography>
+            </NavLink>
+            <NavLink
+              to="/shadow"
+              className={(isActive) => cx("navlink", isActive)}
+            >
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Shadow
               </Typography>
             </NavLink>
           </Box>
