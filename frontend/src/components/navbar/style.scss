@@ -1,0 +1,15 @@
+.navlink {
+    text-decoration: none;
+    color: #f7ede2;
+
+    &:hover {
+        text-decoration: underline 4px solid #f6bd60;
+        color: #f6bd60;
+    }
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
