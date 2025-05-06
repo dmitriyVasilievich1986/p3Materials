@@ -1,4 +1,5 @@
 .pytest_cache
+node_modules
 .mypy_cache
 __pycache__
 *egg-info
@@ -6,6 +7,7 @@ __pycache__
 *.sqlite
 *.ipynb
 .vscode
+static
 *.pyc
 dist
 venv
