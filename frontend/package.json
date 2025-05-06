@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.7.0",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "react": "^19.1.0",
