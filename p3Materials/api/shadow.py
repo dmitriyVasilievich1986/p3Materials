@@ -5,12 +5,23 @@ from flask_appbuilder.const import API_RESULT_RES_KEY
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 
 from p3Materials.constants import Arcanas, DamageMultiplier
-from p3Materials.models.shadow import Shadow
+from p3Materials.models.shadow import Floor, Shadow
 
 
 class ArcanasResponse(TypedDict):
     id: int
     name: str
+
+
+class FloorModelApi(ModelRestApi):
+    resource_name = "floor"
+    datamodel: SQLAInterface = SQLAInterface(Floor)
+    allow_browser_login = True
+    include_route_methods = {"get_list"}
+
+    list_columns = [
+        Floor.id.key,
+    ]
 
 
 class ShadowModelApi(ModelRestApi):
