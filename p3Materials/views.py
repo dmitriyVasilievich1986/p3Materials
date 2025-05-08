@@ -10,6 +10,7 @@ class ShadowView(BaseView):
     route_base = "/shadow"
 
     @expose("/")
-    @expose("/<int:pk>/")
+    @expose("/create")
+    @expose("/<int:pk>")
     def shadow(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
