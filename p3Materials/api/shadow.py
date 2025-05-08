@@ -1,14 +1,25 @@
-from flask_appbuilder.api import ModelRestApi
+from typing import TypedDict
+
+from flask_appbuilder.api import expose, ModelRestApi
+from flask_appbuilder.const import API_RESULT_RES_KEY
 from flask_appbuilder.models.sqla.interface import SQLAInterface
 
+from p3Materials.constants import Arcanas, DamageMultiplier
 from p3Materials.models.shadow import Shadow
+
+
+class ArcanasResponse(TypedDict):
+    id: int
+    name: str
 
 
 class ShadowModelApi(ModelRestApi):
     resource_name = "shadow"
     datamodel: SQLAInterface = SQLAInterface(Shadow)
     allow_browser_login = True
+
     list_columns = [
+        Shadow.id.key,
         Shadow.name.key,
         Shadow.stats.key,
         Shadow.arcana.key,
@@ -71,3 +82,18 @@ class ShadowModelApi(ModelRestApi):
         Shadow.light.key,
         Shadow.darkness.key,
     ]
+
+    @expose("/damage_multiplier", methods=["GET"])
+    def get_damage_multiplier(self) -> dict[str, list[str]]:
+        return {
+            API_RESULT_RES_KEY: [x.value for x in DamageMultiplier.__members__.values()]
+        }
+
+    @expose("/arcanas", methods=["GET"])
+    def arcanas(self) -> dict[str, list[ArcanasResponse]]:
+        return {
+            API_RESULT_RES_KEY: [
+                ArcanasResponse(id=v.value, name=k)
+                for k, v in Arcanas.__members__.items()
+            ]
+        }
