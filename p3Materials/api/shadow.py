@@ -3,6 +3,7 @@ from typing import TypedDict
 from flask_appbuilder.api import expose, ModelRestApi
 from flask_appbuilder.const import API_RESULT_RES_KEY
 from flask_appbuilder.models.sqla.interface import SQLAInterface
+from marshmallow import fields, Schema
 
 from p3Materials.constants import Arcanas, DamageMultiplier
 from p3Materials.models.shadow import Floor, Shadow
@@ -11,6 +12,11 @@ from p3Materials.models.shadow import Floor, Shadow
 class ArcanasResponse(TypedDict):
     id: int
     name: str
+
+
+class ShadowSimple(Schema):
+    id = fields.Int()
+    name = fields.String()
 
 
 class FloorModelApi(ModelRestApi):
@@ -93,6 +99,11 @@ class ShadowModelApi(ModelRestApi):
         Shadow.light.key,
         Shadow.darkness.key,
     ]
+
+    @expose("/simple", methods=["GET"])
+    def get_simple(self) -> dict[str, list[str]]:
+        shadows = self.datamodel.session.query(Shadow.id, Shadow.name).all()
+        return {API_RESULT_RES_KEY: ShadowSimple().dump(shadows, many=True)}
 
     @expose("/damage_multiplier", methods=["GET"])
     def get_damage_multiplier(self) -> dict[str, list[str]]:

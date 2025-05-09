@@ -1,25 +1,18 @@
 import * as React from "react";
 import * as style from "./style.scss";
 
-import { Flex, Pagination, Table, TableColumnsType } from "antd";
-import type {
-  ShadowSliceInitialStateType,
-  ShadowType,
-} from "../../../reducers/types";
-import { useDispatch, useSelector } from "react-redux";
+import { Flex, Table, TableColumnsType } from "antd";
 import { useNavigate, useSearchParams } from "react-router";
 
 import { PagesUrls } from "../../../constants";
+import type { ShadowSimpleType } from "../../../reducers/types";
 
-import axios from "axios";
 import classnames from "classnames/bind";
-
-import { encode } from "rison";
-import { setShadows } from "../../../reducers/shadowSlice";
+import { shadowsCaller } from "../../../reducers/callers";
 
 const cx = classnames.bind(style);
 
-const columns: TableColumnsType<ShadowType<number>> = [
+const columns: TableColumnsType<ShadowSimpleType> = [
   {
     title: "ID",
     dataIndex: "id",
@@ -29,77 +22,54 @@ const columns: TableColumnsType<ShadowType<number>> = [
     title: "Name",
     dataIndex: "name",
     key: "2",
+    defaultSortOrder: "ascend",
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
 ];
 
 function Body() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const shadows: ShadowType<number>[] = useSelector(
-    (state: { shadow: ShadowSliceInitialStateType }) => state.shadow.shadows
-  );
-
-  const [total, setTotal] = React.useState<number>(0);
+  const [shadows, fillShadows] = shadowsCaller();
 
   React.useEffect(() => {
-    const nameFilter = searchParams.get("nameFilter") ?? "";
-    const filters =
-      nameFilter === "" ? [] : [{ col: "name", opr: "ct", value: nameFilter }];
-    const page = searchParams.get("page")
-      ? parseInt(searchParams.get("page"))
-      : 1;
-    const pageSize = searchParams.get("pageSize")
-      ? parseInt(searchParams.get("pageSize"))
-      : 10;
-    const p = encode({
-      page: page - 1,
-      page_size: pageSize,
-      filters,
-    });
+    fillShadows();
+  }, []);
 
-    axios
-      .get(`/api/v1/shadow/?q=${p}`)
-      .then(
-        (response: {
-          data: { result: ShadowType<number>[]; count: number };
-        }) => {
-          dispatch(setShadows(response.data.result));
-          setTotal(response.data.count);
-        }
-      );
-  }, [searchParams]);
+  const shadowForData = () => {
+    const nameFilter = searchParams.get("nameFilter");
+    return shadows
+      .filter(
+        (s) =>
+          !nameFilter || s.name.toLowerCase().includes(nameFilter.toLowerCase())
+      )
+      .map((s) => ({ ...s, key: s.id }));
+  };
 
   return (
     <div className={cx("shadow-list-body-container")}>
       <Flex justify="center" className={cx("row")}>
-        <Table<ShadowType<number>>
+        <Table<ShadowSimpleType>
+          dataSource={shadowForData()}
           style={{ width: "90%" }}
           columns={columns}
-          dataSource={shadows.map((s) => ({ ...s, key: s.id }))}
           size="middle"
-          pagination={false}
+          pagination={{
+            showSizeChanger: false,
+            current: parseInt(searchParams.get("page")) || 1,
+          }}
+          onChange={(pagination) => {
+            setSearchParams((prev) => {
+              prev.set("page", `${pagination.current}`);
+              return prev;
+            });
+          }}
           onRow={(record) => {
             return {
               onClick: () => navigate(`${PagesUrls.shadow.url}${record.id}`),
             };
           }}
-        />
-      </Flex>
-      <Flex justify="end" className={cx("row")}>
-        <Pagination
-          total={total}
-          showSizeChanger={false}
-          current={
-            searchParams.get("page") ? parseInt(searchParams.get("page")) : 1
-          }
-          onChange={(v) =>
-            setSearchParams((prev) => {
-              prev.set("page", v.toString());
-              return prev;
-            })
-          }
         />
       </Flex>
     </div>

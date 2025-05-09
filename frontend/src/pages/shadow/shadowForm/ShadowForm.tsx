@@ -1,17 +1,18 @@
 import * as React from "react";
 import * as style from "./style.scss";
 
+import { APIUrls, PagesUrls } from "../../../constants";
 import { Button, Card, Flex, Form, Space } from "antd";
+
+import { addShadow, updateShadow } from "../../../reducers/shadowSlice";
 import { useNavigate, useParams } from "react-router";
 
 import MainDetails from "./MainDetails";
-import { PagesUrls } from "../../../constants";
 import type { ShadowType } from "../../../reducers/types";
 import Weakneses from "./Weakneses";
 
 import axios from "axios";
 import classnames from "classnames/bind";
-import { updateShadow } from "../../../reducers/shadowSlice";
 import { useDispatch } from "react-redux";
 
 const cx = classnames.bind(style);
@@ -20,14 +21,15 @@ function ShadowForm() {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [form] = Form.useForm<ShadowType<number>>();
+  const [form] = Form.useForm<ShadowType>();
 
-  const [currentShadow, setCurrentShadow] =
-    React.useState<ShadowType<number> | null>(null);
+  const [currentShadow, setCurrentShadow] = React.useState<ShadowType | null>(
+    null
+  );
 
   const getShadow = () => {
     axios
-      .get(`/api/v1/shadow/${params.shadowId}`)
+      .get(`${APIUrls.shadow.url}${params.shadowId}`)
       .then((response: { data: { result: ShadowType<{ id: number }> } }) => {
         const newFloors = response.data.result.floors.map((f) => f.id);
         setCurrentShadow({ ...response.data.result, floors: newFloors });
@@ -40,26 +42,27 @@ function ShadowForm() {
     }
   }, [params]);
 
-  const putHandler = (data: ShadowType<number>, id: number) => {
+  const putHandler = (data: ShadowType, id: number) => {
     axios
-      .put(`/api/v1/shadow/${id}`, data)
-      .then((response: { data: { result: ShadowType<number> } }) => {
-        setCurrentShadow(response.data.result);
-        dispatch(updateShadow(response.data.result));
+      .put(`${APIUrls.shadow.url}${id}`, data)
+      .then((response: { data: { result: ShadowType } }) => {
+        const updated = response.data.result;
+        setCurrentShadow(updated);
+        dispatch(updateShadow({ id: updated.id, name: updated.name }));
       });
   };
 
-  const postHandler = (data: ShadowType<number>) => {
+  const postHandler = (data: ShadowType) => {
     axios
-      .post("/api/v1/shadow/", data)
-      .then(
-        (response: { data: { id: number; result: ShadowType<number> } }) => {
-          navigate(`${PagesUrls.shadow.url}${response.data.id}`);
-        }
-      );
+      .post(APIUrls.shadow.url, data)
+      .then((response: { data: { id: number; result: ShadowType } }) => {
+        const newShadow = response.data.result;
+        dispatch(addShadow({ id: response.data.id, name: newShadow.name }));
+        navigate(`${PagesUrls.shadow.url}${response.data.id}`);
+      });
   };
 
-  const onFinish = (values: ShadowType<number>) => {
+  const onFinish = (values: ShadowType) => {
     const id = values.id;
     delete values.id;
     if (!id) {

@@ -1,61 +1,61 @@
 import * as React from "react";
 
+import type {
+  ArcanaType,
+  FloorType,
+  ShadowType,
+} from "../../../reducers/types";
 import { Divider, Form, Input, Select } from "antd";
 
-import type { ShadowType } from "../../../reducers/types";
+import { addFloors, setArcanas } from "../../../reducers/shadowSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { APIUrls } from "../../../constants";
+import { RootState } from "../../../store";
 
 import axios from "axios";
 import { encode } from "rison";
 
-type ArcanaType = {
-  id: number;
-  name: string;
-};
-
 function MainDetails() {
-  const [floors, setFloors] = React.useState<number[]>([]);
-  const [arcanas, setArcanas] = React.useState<ArcanaType[]>([]);
+  const dispatch = useDispatch();
+
+  const arcanas = useSelector((state: RootState) => state.shadow.arcanas);
+  const floors = useSelector((state: RootState) => state.shadow.floors);
 
   React.useEffect(() => {
-    getArcanas();
-  }, []);
-
-  const getArcanas = () => {
     if (arcanas.length > 0) return;
     axios
-      .get("/api/v1/shadow/arcanas")
+      .get(APIUrls.arcanas.url)
       .then((response: { data: { result: ArcanaType[] } }) => {
-        setArcanas(response.data.result);
+        dispatch(setArcanas(response.data.result));
       });
-  };
+  }, []);
 
   const getFloors = (page: number = 0) => {
-    if (floors.length > 0) return;
+    if (floors.length > 0 && page === 0) return;
     const p = encode({
       page: page,
       page_size: 100,
     });
     axios
-      .get(`/api/v1/floor/?q=${p}`)
-      .then(
-        (response: { data: { result: { id: number }[]; count: number } }) => {
-          setFloors((f) => [...f, ...response.data.result.map((f) => f.id)]);
-          if (response.data.count > (page + 1) * 100) {
-            getFloors(page + 1);
-          }
+      .get(`${APIUrls.floor.url}?q=${p}`)
+      .then((response: { data: { result: FloorType[]; count: number } }) => {
+        dispatch(addFloors(response.data.result));
+        if (response.data.count > (page + 1) * 100) {
+          getFloors(page + 1);
         }
-      );
+      });
   };
 
   return (
     <>
       <Divider style={{ marginTop: "0" }}>Main details</Divider>
 
-      <Form.Item<ShadowType<number>> name="id" hidden>
+      <Form.Item<ShadowType> name="id" hidden>
         <Input />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>>
+      <Form.Item<ShadowType>
         label="Name"
         name="name"
         rules={[{ required: true, message: "Please input name for shadow!" }]}
@@ -63,19 +63,19 @@ function MainDetails() {
         <Input />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Stats" name="stats">
+      <Form.Item<ShadowType> label="Stats" name="stats">
         <Input />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Arcana" name="arcana">
+      <Form.Item<ShadowType> label="Arcana" name="arcana">
         <Select
           options={arcanas.map((a) => ({ label: a.name, value: a.id }))}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Floors" name="floors">
+      <Form.Item<ShadowType> label="Floors" name="floors">
         <Select
-          options={floors.map((f) => ({ label: f, value: f }))}
+          options={floors.map((f) => ({ label: f.id, value: f.id }))}
           onOpenChange={() => getFloors(0)}
           maxTagCount={5}
           mode="multiple"
