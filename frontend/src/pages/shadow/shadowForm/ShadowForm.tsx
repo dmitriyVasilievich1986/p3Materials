@@ -5,7 +5,7 @@ import { Button, Card, Flex, Form, Space } from "antd";
 import { useNavigate, useParams } from "react-router";
 
 import MainDetails from "./MainDetails";
-import { PagesUrls } from "../../../constants";
+import { APIUrls, PagesUrls } from "../../../constants";
 import type { ShadowType } from "../../../reducers/types";
 import Weakneses from "./Weakneses";
 
@@ -27,7 +27,7 @@ function ShadowForm() {
 
   const getShadow = () => {
     axios
-      .get(`/api/v1/shadow/${params.shadowId}`)
+      .get(`${APIUrls.shadow.url}${params.shadowId}`)
       .then((response: { data: { result: ShadowType<{ id: number }> } }) => {
         const newFloors = response.data.result.floors.map((f) => f.id);
         setCurrentShadow({ ...response.data.result, floors: newFloors });
@@ -42,7 +42,7 @@ function ShadowForm() {
 
   const putHandler = (data: ShadowType<number>, id: number) => {
     axios
-      .put(`/api/v1/shadow/${id}`, data)
+      .put(`${APIUrls.shadow.url}${id}`, data)
       .then((response: { data: { result: ShadowType<number> } }) => {
         setCurrentShadow(response.data.result);
         dispatch(updateShadow(response.data.result));
@@ -51,7 +51,7 @@ function ShadowForm() {
 
   const postHandler = (data: ShadowType<number>) => {
     axios
-      .post("/api/v1/shadow/", data)
+      .post(APIUrls.shadow.url, data)
       .then(
         (response: { data: { id: number; result: ShadowType<number> } }) => {
           navigate(`${PagesUrls.shadow.url}${response.data.id}`);

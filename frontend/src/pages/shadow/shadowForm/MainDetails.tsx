@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Divider, Form, Input, Select } from "antd";
 
+import { APIUrls } from "../../../constants";
 import type { ShadowType } from "../../../reducers/types";
 
 import axios from "axios";
@@ -23,7 +24,7 @@ function MainDetails() {
   const getArcanas = () => {
     if (arcanas.length > 0) return;
     axios
-      .get("/api/v1/shadow/arcanas")
+      .get(APIUrls.arcanas.url)
       .then((response: { data: { result: ArcanaType[] } }) => {
         setArcanas(response.data.result);
       });
@@ -36,7 +37,7 @@ function MainDetails() {
       page_size: 100,
     });
     axios
-      .get(`/api/v1/floor/?q=${p}`)
+      .get(`${APIUrls.floors.url}?q=${p}`)
       .then(
         (response: { data: { result: { id: number }[]; count: number } }) => {
           setFloors((f) => [...f, ...response.data.result.map((f) => f.id)]);

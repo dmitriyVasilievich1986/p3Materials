@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Divider, Form, Select } from "antd";
 
+import { APIUrls } from "../../../constants";
 import type { ShadowType } from "../../../reducers/types";
 
 import axios from "axios";
@@ -12,7 +13,7 @@ function Weakneses() {
   const getDamageModifiers = () => {
     if (damageModifiers.length > 0) return;
     axios
-      .get("/api/v1/shadow/damage_multiplier")
+      .get(APIUrls.damageModifiers.url)
       .then((response: { data: { result: string[] } }) => {
         setDamageModifiers(response.data.result);
       });

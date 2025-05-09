@@ -9,7 +9,7 @@ import type {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
-import { PagesUrls } from "../../../constants";
+import { APIUrls, PagesUrls } from "../../../constants";
 
 import axios from "axios";
 import classnames from "classnames/bind";
@@ -60,7 +60,7 @@ function Body() {
     });
 
     axios
-      .get(`/api/v1/shadow/?q=${p}`)
+      .get(`${APIUrls.shadow.url}/?q=${p}`)
       .then(
         (response: {
           data: { result: ShadowType<number>[]; count: number };
