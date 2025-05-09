@@ -1,4 +1,4 @@
-import ShadowsList from "./ShadowsList";
-import ShadowPage from "./ShadowPage";
+import ShadowForm from "./shadowForm/ShadowForm";
+import ShadowsList from "./shadowsList/ShadowsList";
 
-export { ShadowsList, ShadowPage };
+export { ShadowForm, ShadowsList };
