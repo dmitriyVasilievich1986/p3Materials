@@ -20,10 +20,11 @@ function ShadowForm() {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [form] = Form.useForm<ShadowType<number>>();
+  const [form] = Form.useForm<ShadowType>();
 
-  const [currentShadow, setCurrentShadow] =
-    React.useState<ShadowType<number> | null>(null);
+  const [currentShadow, setCurrentShadow] = React.useState<ShadowType | null>(
+    null
+  );
 
   const getShadow = () => {
     axios
@@ -40,26 +41,24 @@ function ShadowForm() {
     }
   }, [params]);
 
-  const putHandler = (data: ShadowType<number>, id: number) => {
+  const putHandler = (data: ShadowType, id: number) => {
     axios
       .put(`${APIUrls.shadow.url}${id}`, data)
-      .then((response: { data: { result: ShadowType<number> } }) => {
+      .then((response: { data: { result: ShadowType } }) => {
         setCurrentShadow(response.data.result);
         dispatch(updateShadow(response.data.result));
       });
   };
 
-  const postHandler = (data: ShadowType<number>) => {
+  const postHandler = (data: ShadowType) => {
     axios
       .post(APIUrls.shadow.url, data)
-      .then(
-        (response: { data: { id: number; result: ShadowType<number> } }) => {
-          navigate(`${PagesUrls.shadow.url}${response.data.id}`);
-        }
-      );
+      .then((response: { data: { id: number; result: ShadowType } }) => {
+        navigate(`${PagesUrls.shadow.url}${response.data.id}`);
+      });
   };
 
-  const onFinish = (values: ShadowType<number>) => {
+  const onFinish = (values: ShadowType) => {
     const id = values.id;
     delete values.id;
     if (!id) {

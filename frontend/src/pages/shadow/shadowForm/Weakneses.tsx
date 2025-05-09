@@ -30,63 +30,63 @@ function Weakneses() {
     <>
       <Divider style={{ marginTop: "0" }}>Weakneses</Divider>
 
-      <Form.Item<ShadowType<number>> label="Slash" name="slash">
+      <Form.Item<ShadowType> label="Slash" name="slash">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Strike" name="strike">
+      <Form.Item<ShadowType> label="Strike" name="strike">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Pierce" name="pierce">
+      <Form.Item<ShadowType> label="Pierce" name="pierce">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Fire" name="fire">
+      <Form.Item<ShadowType> label="Fire" name="fire">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Ice" name="ice">
+      <Form.Item<ShadowType> label="Ice" name="ice">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Lightning" name="lightning">
+      <Form.Item<ShadowType> label="Lightning" name="lightning">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Wind" name="wind">
+      <Form.Item<ShadowType> label="Wind" name="wind">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Light" name="light">
+      <Form.Item<ShadowType> label="Light" name="light">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Darkness" name="darkness">
+      <Form.Item<ShadowType> label="Darkness" name="darkness">
         <Select
           options={damageModifiers.map((dm) => ({ label: dm, value: dm }))}
           onOpenChange={getDamageModifiers}

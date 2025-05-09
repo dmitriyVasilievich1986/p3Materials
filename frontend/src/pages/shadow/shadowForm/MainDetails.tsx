@@ -51,11 +51,11 @@ function MainDetails() {
     <>
       <Divider style={{ marginTop: "0" }}>Main details</Divider>
 
-      <Form.Item<ShadowType<number>> name="id" hidden>
+      <Form.Item<ShadowType> name="id" hidden>
         <Input />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>>
+      <Form.Item<ShadowType>
         label="Name"
         name="name"
         rules={[{ required: true, message: "Please input name for shadow!" }]}
@@ -63,17 +63,17 @@ function MainDetails() {
         <Input />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Stats" name="stats">
+      <Form.Item<ShadowType> label="Stats" name="stats">
         <Input />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Arcana" name="arcana">
+      <Form.Item<ShadowType> label="Arcana" name="arcana">
         <Select
           options={arcanas.map((a) => ({ label: a.name, value: a.id }))}
         />
       </Form.Item>
 
-      <Form.Item<ShadowType<number>> label="Floors" name="floors">
+      <Form.Item<ShadowType> label="Floors" name="floors">
         <Select
           options={floors.map((f) => ({ label: f.id, value: f.id }))}
           onOpenChange={() => getFloors(0)}

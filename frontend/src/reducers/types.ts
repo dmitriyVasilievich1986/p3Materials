@@ -25,8 +25,8 @@ export type ShadowType<F = number> = {
 };
 
 export type ShadowSliceInitialStateType = {
-  shadows: ShadowType<number>[];
-  shadow: ShadowType<number> | null;
+  shadows: ShadowType[];
+  shadow: ShadowType | null;
   arcanas: ArcanaType[];
   damageModifiers: string[];
   floors: FloorType[];

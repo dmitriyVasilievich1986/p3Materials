@@ -17,7 +17,7 @@ import { setShadows } from "../../../reducers/shadowSlice";
 
 const cx = classnames.bind(style);
 
-const columns: TableColumnsType<ShadowType<number>> = [
+const columns: TableColumnsType<ShadowType> = [
   {
     title: "ID",
     dataIndex: "id",
@@ -35,7 +35,7 @@ function Body() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const shadows: ShadowType<number>[] = useSelector(
+  const shadows: ShadowType[] = useSelector(
     (state: RootState) => state.shadow.shadows
   );
 
@@ -59,20 +59,16 @@ function Body() {
 
     axios
       .get(`${APIUrls.shadow.url}?q=${p}`)
-      .then(
-        (response: {
-          data: { result: ShadowType<number>[]; count: number };
-        }) => {
-          dispatch(setShadows(response.data.result));
-          setTotal(response.data.count);
-        }
-      );
+      .then((response: { data: { result: ShadowType[]; count: number } }) => {
+        dispatch(setShadows(response.data.result));
+        setTotal(response.data.count);
+      });
   }, [searchParams]);
 
   return (
     <div className={cx("shadow-list-body-container")}>
       <Flex justify="center" className={cx("row")}>
-        <Table<ShadowType<number>>
+        <Table<ShadowType>
           style={{ width: "90%" }}
           columns={columns}
           dataSource={shadows.map((s) => ({ ...s, key: s.id }))}
