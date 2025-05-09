@@ -1,13 +1,11 @@
 import * as React from "react";
 
 import { Divider, Form, Select } from "antd";
-import type {
-  ShadowSliceInitialStateType,
-  ShadowType,
-} from "../../../reducers/types";
 import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
+import { RootState } from "../../../store";
+import type { ShadowType } from "../../../reducers/types";
 
 import axios from "axios";
 import { setDamageModifiers } from "../../../reducers/shadowSlice";
@@ -16,8 +14,7 @@ function Weakneses() {
   const dispatch = useDispatch();
 
   const damageModifiers = useSelector(
-    (state: { shadow: ShadowSliceInitialStateType }) =>
-      state.shadow.damageModifiers
+    (state: RootState) => state.shadow.damageModifiers
   );
 
   const getDamageModifiers = () => {

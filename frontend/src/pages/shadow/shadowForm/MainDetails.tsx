@@ -3,7 +3,6 @@ import * as React from "react";
 import type {
   ArcanaType,
   FloorType,
-  ShadowSliceInitialStateType,
   ShadowType,
 } from "../../../reducers/types";
 import { Divider, Form, Input, Select } from "antd";
@@ -12,6 +11,7 @@ import { addFloors, setArcanas } from "../../../reducers/shadowSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
+import { RootState } from "../../../store";
 
 import axios from "axios";
 import { encode } from "rison";
@@ -19,12 +19,8 @@ import { encode } from "rison";
 function MainDetails() {
   const dispatch = useDispatch();
 
-  const arcanas = useSelector(
-    (state: { shadow: ShadowSliceInitialStateType }) => state.shadow.arcanas
-  );
-  const floors: FloorType[] = useSelector(
-    (state: { shadow: ShadowSliceInitialStateType }) => state.shadow.floors
-  );
+  const arcanas = useSelector((state: RootState) => state.shadow.arcanas);
+  const floors = useSelector((state: RootState) => state.shadow.floors);
 
   React.useEffect(() => {
     if (arcanas.length > 0) return;

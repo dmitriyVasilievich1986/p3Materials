@@ -3,12 +3,11 @@ import * as style from "./style.scss";
 
 import { APIUrls, PagesUrls } from "../../../constants";
 import { Flex, Pagination, Table, TableColumnsType } from "antd";
-import type {
-  ShadowSliceInitialStateType,
-  ShadowType,
-} from "../../../reducers/types";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
+
+import { RootState } from "../../../store";
+import type { ShadowType } from "../../../reducers/types";
 
 import axios from "axios";
 import classnames from "classnames/bind";
@@ -37,7 +36,7 @@ function Body() {
   const dispatch = useDispatch();
 
   const shadows: ShadowType<number>[] = useSelector(
-    (state: { shadow: ShadowSliceInitialStateType }) => state.shadow.shadows
+    (state: RootState) => state.shadow.shadows
   );
 
   const [total, setTotal] = React.useState<number>(0);
