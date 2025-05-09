@@ -22,6 +22,8 @@ const columns: TableColumnsType<ShadowSimpleType> = [
     title: "Name",
     dataIndex: "name",
     key: "2",
+    defaultSortOrder: "ascend",
+    sorter: (a, b) => a.name.localeCompare(b.name),
   },
 ];
 
