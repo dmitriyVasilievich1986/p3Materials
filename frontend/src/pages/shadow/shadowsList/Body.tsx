@@ -60,7 +60,7 @@ function Body() {
     });
 
     axios
-      .get(`${APIUrls.shadow.url}/?q=${p}`)
+      .get(`${APIUrls.shadow.url}?q=${p}`)
       .then(
         (response: {
           data: { result: ShadowType<number>[]; count: number };
