@@ -3,6 +3,8 @@ import * as style from "./style.scss";
 
 import { APIUrls, PagesUrls } from "../../../constants";
 import { Button, Card, Flex, Form, Space } from "antd";
+
+import { addShadow, updateShadow } from "../../../reducers/shadowSlice";
 import { useNavigate, useParams } from "react-router";
 
 import MainDetails from "./MainDetails";
@@ -11,7 +13,6 @@ import Weakneses from "./Weakneses";
 
 import axios from "axios";
 import classnames from "classnames/bind";
-import { updateShadow } from "../../../reducers/shadowSlice";
 import { useDispatch } from "react-redux";
 
 const cx = classnames.bind(style);
@@ -45,8 +46,9 @@ function ShadowForm() {
     axios
       .put(`${APIUrls.shadow.url}${id}`, data)
       .then((response: { data: { result: ShadowType } }) => {
-        setCurrentShadow(response.data.result);
-        dispatch(updateShadow(response.data.result));
+        const updated = response.data.result;
+        setCurrentShadow(updated);
+        dispatch(updateShadow({ id: updated.id, name: updated.name }));
       });
   };
 
@@ -54,6 +56,8 @@ function ShadowForm() {
     axios
       .post(APIUrls.shadow.url, data)
       .then((response: { data: { id: number; result: ShadowType } }) => {
+        const newShadow = response.data.result;
+        dispatch(addShadow({ id: response.data.id, name: newShadow.name }));
         navigate(`${PagesUrls.shadow.url}${response.data.id}`);
       });
   };
