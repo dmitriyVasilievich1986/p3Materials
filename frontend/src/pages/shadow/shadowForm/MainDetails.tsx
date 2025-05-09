@@ -7,10 +7,11 @@ import type {
   ShadowType,
 } from "../../../reducers/types";
 import { Divider, Form, Input, Select } from "antd";
+
+import { addFloors, setArcanas } from "../../../reducers/shadowSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
-import { addFloors, setArcanas } from "../../../reducers/shadowSlice";
 
 import axios from "axios";
 import { encode } from "rison";

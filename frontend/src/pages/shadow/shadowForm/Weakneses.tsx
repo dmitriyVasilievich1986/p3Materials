@@ -1,16 +1,16 @@
 import * as React from "react";
 
+import { Divider, Form, Select } from "antd";
 import type {
   ShadowSliceInitialStateType,
   ShadowType,
 } from "../../../reducers/types";
-import { Divider, Form, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
-import { setDamageModifiers } from "../../../reducers/shadowSlice";
 
 import axios from "axios";
+import { setDamageModifiers } from "../../../reducers/shadowSlice";
 
 function Weakneses() {
   const dispatch = useDispatch();

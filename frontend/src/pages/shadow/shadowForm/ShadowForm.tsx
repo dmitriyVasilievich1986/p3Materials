@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as style from "./style.scss";
 
+import { APIUrls, PagesUrls } from "../../../constants";
 import { Button, Card, Flex, Form, Space } from "antd";
 import { useNavigate, useParams } from "react-router";
 
 import MainDetails from "./MainDetails";
-import { APIUrls, PagesUrls } from "../../../constants";
 import type { ShadowType } from "../../../reducers/types";
 import Weakneses from "./Weakneses";
 
