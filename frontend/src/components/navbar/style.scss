@@ -1,19 +1,29 @@
-.navlink {
-    text-decoration: none;
+.navbar-container {
+    height: 100%;
+    width: 100%;
+
+    & > .navbar-wrapper {
+        min-width: 500px;
+    }
+}
+
+.navbar-link {
     color: #f7ede2;
+
+    & > * {
+        margin: 0;
+    }
 
     &.isActive {
         text-decoration: underline 4px solid #f7ede2;
     }
 
     &:hover {
-        text-decoration: underline 4px solid #f6bd60;
+        text-decoration: none;
         color: #f6bd60;
-    }
-}
 
-.navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+        &.isActive {
+            text-decoration: underline 4px solid #f6bd60;
+        }
+    }
 }
