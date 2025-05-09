@@ -14,3 +14,14 @@ class ShadowView(BaseView):
     @expose("/<int:pk>")
     def shadow(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
+
+
+class MaterialView(BaseView):
+    default_view = "material_view"
+    route_base = "/material"
+
+    @expose("/")
+    @expose("/create")
+    @expose("/<int:pk>")
+    def material(self, pk: int | None = None) -> str:
+        return self.render_template("index.html", appbuilder=self.appbuilder)
