@@ -81,3 +81,11 @@ class Shadow(Model):
     def __str__(self):
         floors = ", ".join([str(floor.id) for floor in self.floors])
         return f'Shadow("{self.name}" [slash={self.slash.value} | strike={self.strike.value} | pierce={self.pierce.value} | fire={self.fire.value} | ice={self.ice.value} | lightning={self.lightning.value} | wind={self.wind.value} | light={self.light.value} | darkness={self.darkness.value}] floors=[{floors}])'
+
+    @property
+    def materials_ids(self) -> list[int]:
+        return [material.id for material in self.materials]
+
+    @property
+    def floors_ids(self) -> list[int]:
+        return [floor.id for floor in self.floors]

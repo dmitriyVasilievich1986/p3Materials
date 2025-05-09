@@ -9,6 +9,7 @@ class MaterialModelApi(ModelRestApi):
     datamodel: SQLAInterface = SQLAInterface(Material)
     allow_browser_login = True
     list_columns = [
+        Material.id.key,
         Material.name.key,
         Material.price.key,
     ]
@@ -19,6 +20,7 @@ class MaterialModelApi(ModelRestApi):
         Material.shadows.key,
     ]
     show_columns = [
+        Material.id.key,
         Material.name.key,
         Material.price.key,
         Material.crafts.key,

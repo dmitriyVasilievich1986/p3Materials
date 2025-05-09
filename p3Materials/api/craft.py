@@ -9,6 +9,7 @@ class CraftModelApi(ModelRestApi):
     datamodel: SQLAInterface = SQLAInterface(Craft)
     allow_browser_login = True
     list_columns = [
+        Craft.id.key,
         Craft.name.key,
         Craft.description.key,
         Craft.buff.key,
@@ -24,6 +25,7 @@ class CraftModelApi(ModelRestApi):
         Craft.materials.key,
     ]
     show_columns = [
+        Craft.id.key,
         Craft.name.key,
         Craft.description.key,
         Craft.buff.key,
