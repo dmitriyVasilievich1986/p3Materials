@@ -1,8 +1,34 @@
-export type PagesUrlsType = {
-  label: string;
+export type APIUrlsType = {
   name: string;
   url: string;
+};
+
+export type PagesUrlsType = APIUrlsType & {
+  label: string;
   isNavigation?: boolean;
+};
+
+export const APIUrls: { [key: string]: APIUrlsType } = {
+  shadow: {
+    name: "shadow",
+    url: "/api/v1/shadow/",
+  },
+  damageMultiplier: {
+    name: "damageMultiplier",
+    url: "/api/v1/shadow/damage_multiplier",
+  },
+  arcanas: {
+    name: "damageMultiplier",
+    url: "/api/v1/shadow/arcanas",
+  },
+  floor: {
+    name: "floor",
+    url: "/api/v1/floor/",
+  },
+  material: {
+    name: "material",
+    url: "/api/v1/material/",
+  },
 };
 
 export const PagesUrls: { [key: string]: PagesUrlsType } = {
