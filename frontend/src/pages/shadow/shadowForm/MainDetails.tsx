@@ -1,51 +1,53 @@
 import * as React from "react";
 
+import type {
+  ArcanaType,
+  FloorType,
+  ShadowSliceInitialStateType,
+  ShadowType,
+} from "../../../reducers/types";
 import { Divider, Form, Input, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
-import type { ShadowType } from "../../../reducers/types";
+import { addFloors, setArcanas } from "../../../reducers/shadowSlice";
 
 import axios from "axios";
 import { encode } from "rison";
 
-type ArcanaType = {
-  id: number;
-  name: string;
-};
-
 function MainDetails() {
-  const [floors, setFloors] = React.useState<number[]>([]);
-  const [arcanas, setArcanas] = React.useState<ArcanaType[]>([]);
+  const dispatch = useDispatch();
+
+  const arcanas = useSelector(
+    (state: { shadow: ShadowSliceInitialStateType }) => state.shadow.arcanas
+  );
+  const floors: FloorType[] = useSelector(
+    (state: { shadow: ShadowSliceInitialStateType }) => state.shadow.floors
+  );
 
   React.useEffect(() => {
-    getArcanas();
-  }, []);
-
-  const getArcanas = () => {
     if (arcanas.length > 0) return;
     axios
       .get(APIUrls.arcanas.url)
       .then((response: { data: { result: ArcanaType[] } }) => {
-        setArcanas(response.data.result);
+        dispatch(setArcanas(response.data.result));
       });
-  };
+  }, []);
 
   const getFloors = (page: number = 0) => {
-    if (floors.length > 0) return;
+    if (floors.length > 0 && page === 0) return;
     const p = encode({
       page: page,
       page_size: 100,
     });
     axios
-      .get(`${APIUrls.floors.url}?q=${p}`)
-      .then(
-        (response: { data: { result: { id: number }[]; count: number } }) => {
-          setFloors((f) => [...f, ...response.data.result.map((f) => f.id)]);
-          if (response.data.count > (page + 1) * 100) {
-            getFloors(page + 1);
-          }
+      .get(`${APIUrls.floor.url}?q=${p}`)
+      .then((response: { data: { result: FloorType[]; count: number } }) => {
+        dispatch(addFloors(response.data.result));
+        if (response.data.count > (page + 1) * 100) {
+          getFloors(page + 1);
         }
-      );
+      });
   };
 
   return (
@@ -76,7 +78,7 @@ function MainDetails() {
 
       <Form.Item<ShadowType<number>> label="Floors" name="floors">
         <Select
-          options={floors.map((f) => ({ label: f, value: f }))}
+          options={floors.map((f) => ({ label: f.id, value: f.id }))}
           onOpenChange={() => getFloors(0)}
           maxTagCount={5}
           mode="multiple"

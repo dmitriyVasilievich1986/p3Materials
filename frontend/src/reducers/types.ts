@@ -1,4 +1,13 @@
-export type ShadowType<F> = {
+export type FloorType = {
+  id: number;
+};
+
+export type ArcanaType = {
+  id: number;
+  name: string;
+};
+
+export type ShadowType<F = number> = {
   id?: number;
   name: string;
   stats: string;
@@ -18,4 +27,7 @@ export type ShadowType<F> = {
 export type ShadowSliceInitialStateType = {
   shadows: ShadowType<number>[];
   shadow: ShadowType<number> | null;
+  arcanas: ArcanaType[];
+  damageModifiers: string[];
+  floors: FloorType[];
 };

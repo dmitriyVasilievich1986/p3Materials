@@ -1,16 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { ShadowSliceInitialStateType, ShadowType } from "./types";
+import type {
+  ArcanaType,
+  FloorType,
+  ShadowSliceInitialStateType,
+  ShadowType,
+} from "./types";
 
 const initialState: ShadowSliceInitialStateType = {
   shadows: [],
   shadow: null,
+  arcanas: [],
+  damageModifiers: [],
+  floors: [],
 };
 
 export const shadowSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
+    setArcanas: (state, action: PayloadAction<ArcanaType[]>) => {
+      state.arcanas = action.payload;
+    },
+    setDamageModifiers: (state, action: PayloadAction<string[]>) => {
+      state.damageModifiers = action.payload;
+    },
     setShadow: (state, action: PayloadAction<ShadowType<number> | null>) => {
       state.shadow = action.payload;
     },
@@ -19,6 +33,9 @@ export const shadowSlice = createSlice({
     },
     addShadow: (state, action: PayloadAction<ShadowType<number>>) => {
       state.shadows = [...state.shadows, action.payload];
+    },
+    addFloors: (state, action: PayloadAction<FloorType[]>) => {
+      state.floors = [...state.floors, ...action.payload];
     },
     removeShadow: (state, action: PayloadAction<number>) => {
       state.shadows = state.shadows.filter((s) => s.id !== action.payload);
@@ -32,7 +49,15 @@ export const shadowSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setShadow, setShadows, addShadow, removeShadow, updateShadow } =
-  shadowSlice.actions;
+export const {
+  addFloors,
+  addShadow,
+  removeShadow,
+  setArcanas,
+  setDamageModifiers,
+  setShadow,
+  setShadows,
+  updateShadow,
+} = shadowSlice.actions;
 
 export default shadowSlice.reducer;

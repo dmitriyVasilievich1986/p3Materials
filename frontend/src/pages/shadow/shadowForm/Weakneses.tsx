@@ -1,21 +1,31 @@
 import * as React from "react";
 
+import type {
+  ShadowSliceInitialStateType,
+  ShadowType,
+} from "../../../reducers/types";
 import { Divider, Form, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
-import type { ShadowType } from "../../../reducers/types";
+import { setDamageModifiers } from "../../../reducers/shadowSlice";
 
 import axios from "axios";
 
 function Weakneses() {
-  const [damageModifiers, setDamageModifiers] = React.useState<string[]>([]);
+  const dispatch = useDispatch();
+
+  const damageModifiers = useSelector(
+    (state: { shadow: ShadowSliceInitialStateType }) =>
+      state.shadow.damageModifiers
+  );
 
   const getDamageModifiers = () => {
     if (damageModifiers.length > 0) return;
     axios
-      .get(APIUrls.damageModifiers.url)
+      .get(APIUrls.damageMultiplier.url)
       .then((response: { data: { result: string[] } }) => {
-        setDamageModifiers(response.data.result);
+        dispatch(setDamageModifiers(response.data.result));
       });
   };
 
