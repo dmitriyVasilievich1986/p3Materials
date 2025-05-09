@@ -4,8 +4,13 @@ import * as React from "react";
 import App from "./App";
 import "./style.scss";
 
+import { Provider } from "react-redux";
+import { store } from "./store";
+
 ReactDOM.createRoot(document.getElementById("app")).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
