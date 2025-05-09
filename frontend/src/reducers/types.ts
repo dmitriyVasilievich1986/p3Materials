@@ -7,6 +7,11 @@ export type ArcanaType = {
   name: string;
 };
 
+export type ShadowSimpleType = {
+  id: number;
+  name: string;
+};
+
 export type ShadowType<F = number> = {
   id?: number;
   name: string;
@@ -25,7 +30,7 @@ export type ShadowType<F = number> = {
 };
 
 export type ShadowSliceInitialStateType = {
-  shadows: ShadowType[];
+  shadows: ShadowSimpleType[];
   shadow: ShadowType | null;
   arcanas: ArcanaType[];
   damageModifiers: string[];

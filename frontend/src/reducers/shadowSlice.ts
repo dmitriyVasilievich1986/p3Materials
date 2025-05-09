@@ -1,11 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 import type {
   ArcanaType,
   FloorType,
+  ShadowSimpleType,
   ShadowSliceInitialStateType,
   ShadowType,
 } from "./types";
+
+import type { PayloadAction } from "@reduxjs/toolkit";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: ShadowSliceInitialStateType = {
   shadows: [],
@@ -25,13 +28,13 @@ export const shadowSlice = createSlice({
     setDamageModifiers: (state, action: PayloadAction<string[]>) => {
       state.damageModifiers = action.payload;
     },
-    setShadow: (state, action: PayloadAction<ShadowType<number> | null>) => {
+    setShadow: (state, action: PayloadAction<ShadowType | null>) => {
       state.shadow = action.payload;
     },
-    setShadows: (state, action: PayloadAction<ShadowType<number>[]>) => {
+    setShadows: (state, action: PayloadAction<ShadowSimpleType[]>) => {
       state.shadows = action.payload;
     },
-    addShadow: (state, action: PayloadAction<ShadowType<number>>) => {
+    addShadow: (state, action: PayloadAction<ShadowSimpleType>) => {
       state.shadows = [...state.shadows, action.payload];
     },
     addFloors: (state, action: PayloadAction<FloorType[]>) => {
@@ -40,7 +43,7 @@ export const shadowSlice = createSlice({
     removeShadow: (state, action: PayloadAction<number>) => {
       state.shadows = state.shadows.filter((s) => s.id !== action.payload);
     },
-    updateShadow: (state, action: PayloadAction<ShadowType<number>>) => {
+    updateShadow: (state, action: PayloadAction<ShadowSimpleType>) => {
       state.shadows = state.shadows.map((s) =>
         s.id === action.payload.id ? action.payload : s
       );
