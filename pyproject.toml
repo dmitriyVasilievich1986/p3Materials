@@ -13,6 +13,7 @@ classifiers = [
 authors = [{ email = "dmitriyvasil@gmail.com" }]
 maintainers = [{ email = "dmitriyvasil@gmail.com" }]
 description = "Database for Persona 3 Reload enemies, items, and materials."
+readme = "Readme.md"
 
 license = "MIT"
 license-files = ["LICENSE"]
