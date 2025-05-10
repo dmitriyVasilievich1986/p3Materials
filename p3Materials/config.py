@@ -12,4 +12,5 @@ SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_PATH}"
 
 STATIC_FOLDER = BASE_PATH.parent / "static"
 TEMPLATE_FOLDER = BASE_PATH / "templates"
+MIGRATIONS_DIR = BASE_PATH / "alembic"
 STATIC_URL_PATH = "/static"
