@@ -1,0 +1,18 @@
+.shadow-list-header-container {
+    max-width: 900px;
+    width: 100%;
+}
+
+.shadow-list-body-container {
+    width: 100%;
+
+    & > .row {
+        margin-top: 2rem;
+        width: 100%;
+    }
+}
+
+.shadow-list {
+    overflow-y: auto;
+    height: 100%;
+}
