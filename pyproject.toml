@@ -42,7 +42,7 @@ path = "p3Materials/__init__.py"
 packages = ["p3Materials"]
 
 [project.scripts]
-p3Materials = "p3Materials.__main__:main"
+p3Materials = "p3Materials.cli:main"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.

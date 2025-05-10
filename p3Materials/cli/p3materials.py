@@ -1,11 +1,11 @@
 from enum import Enum
 
 import click
-from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.sql.expression import and_, true
 
-from p3Materials.config import SQLALCHEMY_DATABASE_URI
+from p3Materials import db
+from p3Materials.cli.main import main
 from p3Materials.models import (
     Craft,
     floor_shadow_table,
@@ -95,7 +95,7 @@ def get_crafts(session: Session, floors: tuple[int], names: tuple[str]) -> list[
     return crafts
 
 
-@click.command()
+@main.command()
 @click.option(
     "--object",
     "-O",
@@ -104,9 +104,8 @@ def get_crafts(session: Session, floors: tuple[int], names: tuple[str]) -> list[
 )
 @click.option("--floors", "-F", type=int, multiple=True, required=False)
 @click.option("--names", "-N", type=str, multiple=True, required=False)
-def main(object: str, floors: tuple[int], names: tuple[str]) -> None:
-    engine = create_engine(SQLALCHEMY_DATABASE_URI)
-    session = Session(engine)
+def p3m(object: str, floors: tuple[int], names: tuple[str]) -> None:
+    session = db.session
 
     match object:
         case Objects.Shadow.value:
@@ -137,10 +136,3 @@ def main(object: str, floors: tuple[int], names: tuple[str]) -> None:
                         .scalar()
                     )
                     click.echo(f"\t{material} x {count}")
-
-    session.close()
-    engine.dispose()
-
-
-if __name__ == "__main__":
-    main()
