@@ -32,6 +32,9 @@ dependencies = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[project.optional-dependencies]
+postgres = ["psycopg2-binary==2.9.6"]
+
 [tool.hatch.version]
 path = "p3Materials/__init__.py"
 
