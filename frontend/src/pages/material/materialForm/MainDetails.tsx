@@ -4,10 +4,10 @@ import { Divider, Form, Input, Select } from "antd";
 
 import type { MaterialType } from "../../../reducers/types";
 
-import { shadowsCaller } from "../../../reducers/callers";
+import { useShadowCaller } from "../../../reducers/hooks";
 
 function MainDetails() {
-  const [shadows, fillShadows] = shadowsCaller();
+  const [shadows, fillShadows] = useShadowCaller();
 
   React.useEffect(() => {
     fillShadows();

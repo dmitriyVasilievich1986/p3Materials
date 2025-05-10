@@ -9,7 +9,7 @@ import { RootState } from "../store";
 import axios from "axios";
 import { setMaterials } from "./materialSlice";
 
-export function shadowsCaller() {
+export function useShadowCaller() {
   const dispatch = useDispatch();
 
   const shadows = useSelector((state: RootState) => state.shadow.shadows);
@@ -28,7 +28,7 @@ export function shadowsCaller() {
   return [shadows, fillShadows] as const;
 }
 
-export function floorsCaller() {
+export function useFloorsCaller() {
   const dispatch = useDispatch();
 
   const floors = useSelector((state: RootState) => state.shadow.floors);
@@ -47,7 +47,7 @@ export function floorsCaller() {
   return [floors, fillFloors] as const;
 }
 
-export function materialCaller() {
+export function useMaterialCaller() {
   const dispatch = useDispatch();
 
   const materials = useSelector((state: RootState) => state.material.materials);

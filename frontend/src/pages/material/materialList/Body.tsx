@@ -8,7 +8,7 @@ import type { MaterialSimpleType } from "../../../reducers/types";
 import { PagesUrls } from "../../../constants";
 
 import classnames from "classnames/bind";
-import { materialCaller } from "../../../reducers/callers";
+import { useMaterialCaller } from "../../../reducers/hooks";
 
 const cx = classnames.bind(style);
 
@@ -31,7 +31,7 @@ function Body() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const [materials, fillMaterials] = materialCaller();
+  const [materials, fillMaterials] = useMaterialCaller();
 
   React.useEffect(() => {
     fillMaterials();
