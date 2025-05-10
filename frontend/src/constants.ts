@@ -37,6 +37,10 @@ export const APIUrls: { [key: string]: APIUrlsType } = {
     name: "material",
     url: "/api/v1/material/",
   },
+  materialSimple: {
+    name: "material",
+    url: "/api/v1/material/simple",
+  },
 };
 
 export const PagesUrls: { [key: string]: PagesUrlsType } = {
@@ -61,5 +65,21 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
     label: "Shadow",
     name: "shadow",
     url: "/shadow/create",
+  },
+  materialList: {
+    label: "Material",
+    name: "material",
+    url: "/material/",
+    isNavigation: true,
+  },
+  material: {
+    label: "Material",
+    name: "material",
+    url: "/material/",
+  },
+  materialCreate: {
+    label: "Material",
+    name: "material",
+    url: "/material/create",
   },
 };
