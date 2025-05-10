@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { craftSlice } from "./reducers/craftSlice";
 import { materialSlice } from "./reducers/materialSlice";
 import { shadowSlice } from "./reducers/shadowSlice";
 
 export const store = configureStore({
   reducer: {
+    craft: craftSlice.reducer,
     shadow: shadowSlice.reducer,
     material: materialSlice.reducer,
   },
