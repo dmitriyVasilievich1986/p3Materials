@@ -36,3 +36,13 @@ class CraftView(BaseView):
     @expose("/<int:pk>")
     def craft(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
+
+
+class FloorView(BaseView):
+    default_view = "floor_view"
+    route_base = "/floor"
+
+    @expose("/")
+    @expose("/<int:pk>")
+    def craft(self, pk: int | None = None) -> str:
+        return self.render_template("index.html", appbuilder=self.appbuilder)

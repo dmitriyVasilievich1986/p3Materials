@@ -7,7 +7,13 @@ from p3Materials.api import (
     MaterialModelApi,
     ShadowModelApi,
 )
-from p3Materials.views import CraftView, MaterialView, P3IndexView, ShadowView
+from p3Materials.views import (
+    CraftView,
+    FloorView,
+    MaterialView,
+    P3IndexView,
+    ShadowView,
+)
 
 
 def create_app() -> Flask:
@@ -26,6 +32,7 @@ def create_app() -> Flask:
         appbuilder.add_api(ShadowModelApi)
         appbuilder.add_api(FloorModelApi)
         appbuilder.add_api(MaterialModelApi)
+        appbuilder.add_view(FloorView, "Floor", category="Floor")
         appbuilder.add_view(CraftView, "Craft", category="Craft")
         appbuilder.add_view(ShadowView, "Shadow", category="Shadow")
         appbuilder.add_view(MaterialView, "Material", category="Material")

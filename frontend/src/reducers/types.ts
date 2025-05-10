@@ -2,6 +2,11 @@ export type FloorType = {
   id: number;
 };
 
+export type FloorFullType<S = number> = {
+  id?: number;
+  shadows: S[];
+};
+
 export type ArcanaType = {
   id: number;
   name: string;
