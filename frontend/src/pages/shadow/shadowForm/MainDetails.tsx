@@ -9,14 +9,14 @@ import { APIUrls } from "../../../constants";
 import { RootState } from "../../../store";
 
 import axios from "axios";
-import { floorsCaller } from "../../../reducers/callers";
 import { setArcanas } from "../../../reducers/shadowSlice";
+import { useFloorsCaller } from "../../../reducers/hooks";
 
 function MainDetails() {
   const dispatch = useDispatch();
 
   const arcanas = useSelector((state: RootState) => state.shadow.arcanas);
-  const [floors, fillFloors] = floorsCaller();
+  const [floors, fillFloors] = useFloorsCaller();
 
   React.useEffect(() => {
     if (arcanas.length > 0) return;

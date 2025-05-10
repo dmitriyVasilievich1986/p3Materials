@@ -8,7 +8,7 @@ import { PagesUrls } from "../../../constants";
 import type { ShadowSimpleType } from "../../../reducers/types";
 
 import classnames from "classnames/bind";
-import { shadowsCaller } from "../../../reducers/callers";
+import { useShadowCaller } from "../../../reducers/hooks";
 
 const cx = classnames.bind(style);
 
@@ -31,7 +31,7 @@ function Body() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const [shadows, fillShadows] = shadowsCaller();
+  const [shadows, fillShadows] = useShadowCaller();
 
   React.useEffect(() => {
     fillShadows();
