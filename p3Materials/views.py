@@ -25,3 +25,14 @@ class MaterialView(BaseView):
     @expose("/<int:pk>")
     def material(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
+
+
+class CraftView(BaseView):
+    default_view = "craft_view"
+    route_base = "/craft"
+
+    @expose("/")
+    @expose("/create")
+    @expose("/<int:pk>")
+    def craft(self, pk: int | None = None) -> str:
+        return self.render_template("index.html", appbuilder=self.appbuilder)
