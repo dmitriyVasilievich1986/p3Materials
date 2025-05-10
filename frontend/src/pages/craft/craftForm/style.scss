@@ -1,0 +1,13 @@
+.shadow-form-container {
+    overflow-y: auto;
+    height: 100%;
+    width: 100%;
+
+    &>div {
+        width: 90%;
+        max-width: 1300px;
+        height: fit-content;
+        margin-bottom: 3rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}
