@@ -19,7 +19,7 @@ const initialState: ShadowSliceInitialStateType = {
 };
 
 export const shadowSlice = createSlice({
-  name: "counter",
+  name: "shadow",
   initialState,
   reducers: {
     setArcanas: (state, action: PayloadAction<ArcanaType[]>) => {
