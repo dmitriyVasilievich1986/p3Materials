@@ -1,6 +1,8 @@
 name: eslint checks
 
-on: push
+on:
+  push:
+    branches: [master]
 
 jobs:
   eslint:
