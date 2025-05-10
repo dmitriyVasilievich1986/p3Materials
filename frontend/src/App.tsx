@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as style from "./style.scss";
 
-import { Flex, Layout } from "antd";
+import { Flex, Layout, message } from "antd";
 import { MaterialForm, MaterialList } from "./pages/material";
 import { Route, Routes } from "react-router";
 import { ShadowForm, ShadowsList } from "./pages/shadow";
@@ -15,8 +15,11 @@ const cx = classnames.bind(style);
 const { Header, Footer, Content } = Layout;
 
 function App() {
+  const [messageApi, contextHolder] = message.useMessage();
+
   return (
     <Flex gap="middle" wrap>
+      {contextHolder}
       <Layout className={cx("app-container")}>
         <Header>
           <Navbar />
