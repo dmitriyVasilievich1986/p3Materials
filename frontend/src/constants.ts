@@ -13,6 +13,10 @@ export const APIUrls: { [key: string]: APIUrlsType } = {
     name: "shadow",
     url: "/api/v1/shadow/",
   },
+  shadowSimple: {
+    name: "shadow",
+    url: "/api/v1/shadow/simple",
+  },
   damageMultiplier: {
     name: "damageMultiplier",
     url: "/api/v1/shadow/damage_multiplier",
@@ -24,6 +28,10 @@ export const APIUrls: { [key: string]: APIUrlsType } = {
   floor: {
     name: "floor",
     url: "/api/v1/floor/",
+  },
+  floorSimple: {
+    name: "floor",
+    url: "/api/v1/floor/simple",
   },
   material: {
     name: "material",
