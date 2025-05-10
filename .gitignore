@@ -11,3 +11,4 @@ static
 *.pyc
 dist
 venv
+todo
