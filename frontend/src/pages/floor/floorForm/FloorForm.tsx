@@ -2,7 +2,7 @@ import * as React from "react";
 import * as style from "./style.scss";
 
 import { Button, Card, Flex, Form } from "antd";
-import type { FloorFullType, ShadowType } from "../../../reducers/types";
+import type { FloorType, ShadowType } from "../../../reducers/types";
 
 import { APIUrls } from "../../../constants";
 import MainDetails from "./MainDetails";
@@ -16,16 +16,16 @@ const cx = classnames.bind(style);
 
 function FloorForm(props: { messageApi: MessageInstance }) {
   const params = useParams();
-  const [form] = Form.useForm<FloorFullType>();
+  const [form] = Form.useForm<FloorType>();
 
-  const [currentFloor, setCurrentFloor] = React.useState<FloorFullType | null>(
+  const [currentFloor, setCurrentFloor] = React.useState<FloorType | null>(
     null
   );
 
   const getFloor = () => {
     axios
       .get(`${APIUrls.floor.url}${params.floorId}`)
-      .then((response: { data: { result: FloorFullType<ShadowType> } }) => {
+      .then((response: { data: { result: FloorType<ShadowType> } }) => {
         const shadows = response.data.result.shadows.map((s) => s.id);
         setCurrentFloor({ ...response.data.result, shadows });
       });
@@ -37,10 +37,10 @@ function FloorForm(props: { messageApi: MessageInstance }) {
     }
   }, [params]);
 
-  const putHandler = (data: FloorFullType, id: number) => {
+  const putHandler = (data: FloorType, id: number) => {
     axios
       .put(`${APIUrls.floor.url}${id}`, data)
-      .then((response: { data: { result: FloorFullType } }) => {
+      .then((response: { data: { result: FloorType } }) => {
         const updated = response.data.result;
         setCurrentFloor(updated);
         props.messageApi.success("Floor updated successfully");
@@ -51,7 +51,7 @@ function FloorForm(props: { messageApi: MessageInstance }) {
       });
   };
 
-  const onFinish = (values: FloorFullType) => {
+  const onFinish = (values: FloorType) => {
     const id = values.id;
     delete values.id;
     putHandler(values, id);
