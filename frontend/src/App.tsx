@@ -31,8 +31,14 @@ function App() {
               <Route path="/" element={<div>Home</div>} />
               <Route path="/shadow">
                 <Route index element={<ShadowsList />} />
-                <Route path="create" element={<ShadowForm />} />
-                <Route path=":shadowId" element={<ShadowForm />} />
+                <Route
+                  path="create"
+                  element={<ShadowForm messageApi={messageApi} />}
+                />
+                <Route
+                  path=":shadowId"
+                  element={<ShadowForm messageApi={messageApi} />}
+                />
               </Route>
               <Route path="/material">
                 <Route index element={<MaterialList />} />
