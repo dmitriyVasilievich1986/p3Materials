@@ -4,10 +4,10 @@ node_modules
 __pycache__
 *egg-info
 .coverage
+static/js
 *.sqlite
 *.ipynb
 .vscode
-static
 *.pyc
 dist
 venv
