@@ -9,6 +9,7 @@ import { addMaterial, updateMaterial } from "../../../reducers/materialSlice";
 import { useNavigate, useParams } from "react-router";
 
 import MainDetails from "./MainDetails";
+import { MessageInstance } from "antd/es/message/interface";
 
 import axios from "axios";
 import classnames from "classnames/bind";
@@ -16,7 +17,7 @@ import { useDispatch } from "react-redux";
 
 const cx = classnames.bind(style);
 
-function MaterialForm() {
+function MaterialForm(props: { messageApi: MessageInstance }) {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,7 +47,12 @@ function MaterialForm() {
       .then((response: { data: { result: MaterialType } }) => {
         const updated = response.data.result;
         setCurrentMaterial(updated);
+        props.messageApi.success("Material updated successfully");
         dispatch(updateMaterial({ id: updated.id, name: updated.name }));
+      })
+      .catch((error) => {
+        props.messageApi.error("Error updating material");
+        console.error("Error updating material:", error);
       });
   };
 
@@ -56,7 +62,12 @@ function MaterialForm() {
       .then((response: { data: { id: number; result: MaterialType } }) => {
         const newMaterial = response.data.result;
         dispatch(addMaterial({ id: response.data.id, name: newMaterial.name }));
+        props.messageApi.success("Material created successfully");
         navigate(`${PagesUrls.material.url}${response.data.id}`);
+      })
+      .catch((error) => {
+        props.messageApi.error("Error creating material");
+        console.error("Error creating material:", error);
       });
   };
 

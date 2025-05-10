@@ -42,8 +42,14 @@ function App() {
               </Route>
               <Route path="/material">
                 <Route index element={<MaterialList />} />
-                <Route path="create" element={<MaterialForm />} />
-                <Route path=":materialId" element={<MaterialForm />} />
+                <Route
+                  path="create"
+                  element={<MaterialForm messageApi={messageApi} />}
+                />
+                <Route
+                  path=":materialId"
+                  element={<MaterialForm messageApi={messageApi} />}
+                />
               </Route>
             </Routes>
           </div>
