@@ -78,6 +78,17 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
     name: "shadow",
     url: "/shadow/create",
   },
+  floorList: {
+    label: "Floor",
+    name: "floor",
+    url: "/floor/",
+    isNavigation: true,
+  },
+  floor: {
+    label: "Floor",
+    name: "floor",
+    url: "/floor/",
+  },
   materialList: {
     label: "Material",
     name: "material",
