@@ -9,8 +9,8 @@ import { APIUrls } from "../../../constants";
 import { RootState } from "../../../store";
 
 import axios from "axios";
-import { setArcanas } from "../../../reducers/shadowSlice";
 import { floorsCaller } from "../../../reducers/callers";
+import { setArcanas } from "../../../reducers/shadowSlice";
 
 function MainDetails() {
   const dispatch = useDispatch();
