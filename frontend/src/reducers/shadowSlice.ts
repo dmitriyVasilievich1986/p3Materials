@@ -40,6 +40,9 @@ export const shadowSlice = createSlice({
     addFloors: (state, action: PayloadAction<FloorType[]>) => {
       state.floors = [...state.floors, ...action.payload];
     },
+    setFloors: (state, action: PayloadAction<FloorType[]>) => {
+      state.floors = action.payload;
+    },
     removeShadow: (state, action: PayloadAction<number>) => {
       state.shadows = state.shadows.filter((s) => s.id !== action.payload);
     },
@@ -58,6 +61,7 @@ export const {
   removeShadow,
   setArcanas,
   setDamageModifiers,
+  setFloors,
   setShadow,
   setShadows,
   updateShadow,
