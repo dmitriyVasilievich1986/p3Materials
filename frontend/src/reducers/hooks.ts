@@ -1,4 +1,9 @@
-import { FloorType, MaterialSimpleType, ShadowSimpleType } from "./types";
+import {
+  CraftSimpleType,
+  FloorType,
+  MaterialSimpleType,
+  ShadowSimpleType,
+} from "./types";
 
 import { setFloors, setShadows } from "./shadowSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +12,7 @@ import { APIUrls } from "../constants";
 import { RootState } from "../store";
 
 import axios from "axios";
+import { setCrafts } from "./craftSlice";
 import { setMaterials } from "./materialSlice";
 
 export function useShadowCaller() {
@@ -64,4 +70,23 @@ export function useMaterialCaller() {
   };
 
   return [materials, fillMaterials] as const;
+}
+
+export function useCraftCaller() {
+  const dispatch = useDispatch();
+
+  const crafts = useSelector((state: RootState) => state.craft.crafts);
+
+  const fillCrafts = () => {
+    if (crafts.length > 0) {
+      return;
+    }
+    axios
+      .get(APIUrls.craftSimple.url)
+      .then((response: { data: { result: CraftSimpleType[] } }) => {
+        dispatch(setCrafts(response.data.result));
+      });
+  };
+
+  return [crafts, fillCrafts] as const;
 }
