@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 
 from p3Materials import appbuilder, db
 from p3Materials.api import (
@@ -38,5 +39,9 @@ def create_app() -> Flask:
         appbuilder.add_view(MaterialView, "Material", category="Material")
         appbuilder.add_permissions(update_perms=True)
         appbuilder.sm.lm.login_view = "AuthDBView.login"
+
+        migrate = Migrate(app, db)
+        migrate.directory = app.config["MIGRATIONS_DIR"]
+        migrate.init_app(app, db)
 
     return app

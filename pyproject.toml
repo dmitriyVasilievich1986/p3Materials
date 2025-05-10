@@ -24,12 +24,16 @@ dependencies = [
     "click>=8.0.0",
     "flask>=2.0, <3.0",
     "flask-appbuilder>=4.0",
+    "flask-migrate>=3.1.0, <4.0",
     "sqlalchemy>=1.4, <2.0",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[project.optional-dependencies]
+postgres = ["psycopg2-binary==2.9.6"]
 
 [tool.hatch.version]
 path = "p3Materials/__init__.py"

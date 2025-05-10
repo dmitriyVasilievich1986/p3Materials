@@ -8,7 +8,9 @@
 -e file:.
     # via -r requirements/base.in
 alembic==1.15.2
-    # via p3materials
+    # via
+    #   flask-migrate
+    #   p3materials
 apispec[yaml]==6.8.1
     # via flask-appbuilder
 attrs==25.3.0
@@ -39,6 +41,7 @@ flask==2.3.3
     #   flask-jwt-extended
     #   flask-limiter
     #   flask-login
+    #   flask-migrate
     #   flask-sqlalchemy
     #   flask-wtf
     #   p3materials
@@ -52,8 +55,12 @@ flask-limiter==3.12
     # via flask-appbuilder
 flask-login==0.6.3
     # via flask-appbuilder
+flask-migrate==3.1.0
+    # via p3materials
 flask-sqlalchemy==2.5.1
-    # via flask-appbuilder
+    # via
+    #   flask-appbuilder
+    #   flask-migrate
 flask-wtf==1.2.2
     # via flask-appbuilder
 idna==3.10
