@@ -1,26 +1,22 @@
 import * as React from "react";
 
-import type {
-  ArcanaType,
-  FloorType,
-  ShadowType,
-} from "../../../reducers/types";
+import type { ArcanaType, ShadowType } from "../../../reducers/types";
 import { Divider, Form, Input, Select } from "antd";
 
-import { addFloors, setArcanas } from "../../../reducers/shadowSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../../../constants";
 import { RootState } from "../../../store";
 
 import axios from "axios";
-import { encode } from "rison";
+import { setArcanas } from "../../../reducers/shadowSlice";
+import { floorsCaller } from "../../../reducers/callers";
 
 function MainDetails() {
   const dispatch = useDispatch();
 
   const arcanas = useSelector((state: RootState) => state.shadow.arcanas);
-  const floors = useSelector((state: RootState) => state.shadow.floors);
+  const [floors, fillFloors] = floorsCaller();
 
   React.useEffect(() => {
     if (arcanas.length > 0) return;
@@ -30,22 +26,6 @@ function MainDetails() {
         dispatch(setArcanas(response.data.result));
       });
   }, []);
-
-  const getFloors = (page: number = 0) => {
-    if (floors.length > 0 && page === 0) return;
-    const p = encode({
-      page: page,
-      page_size: 100,
-    });
-    axios
-      .get(`${APIUrls.floor.url}?q=${p}`)
-      .then((response: { data: { result: FloorType[]; count: number } }) => {
-        dispatch(addFloors(response.data.result));
-        if (response.data.count > (page + 1) * 100) {
-          getFloors(page + 1);
-        }
-      });
-  };
 
   return (
     <>
@@ -76,7 +56,7 @@ function MainDetails() {
       <Form.Item<ShadowType> label="Floors" name="floors">
         <Select
           options={floors.map((f) => ({ label: f.id, value: f.id }))}
-          onOpenChange={() => getFloors(0)}
+          onOpenChange={fillFloors}
           maxTagCount={5}
           mode="multiple"
         />
