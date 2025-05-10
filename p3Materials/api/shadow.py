@@ -27,10 +27,18 @@ class FloorModelApi(ModelRestApi):
     resource_name = "floor"
     datamodel: SQLAInterface = SQLAInterface(Floor)
     allow_browser_login = True
-    include_route_methods = {"get_list", "get_simple"}
+    exclude_route_methods = {"post"}
 
     list_columns = [
         Floor.id.key,
+    ]
+    edit_columns = [
+        Floor.id.key,
+        Floor.shadows.key,
+    ]
+    show_columns = [
+        Floor.id.key,
+        Floor.shadows.key,
     ]
 
     @expose("/simple", methods=["GET"])
