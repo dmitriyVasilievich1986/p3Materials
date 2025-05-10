@@ -1,6 +1,6 @@
 import type {
   ArcanaType,
-  FloorType,
+  FloorSimpleType,
   ShadowSimpleType,
   ShadowSliceInitialStateType,
   ShadowType,
@@ -37,10 +37,10 @@ export const shadowSlice = createSlice({
     addShadow: (state, action: PayloadAction<ShadowSimpleType>) => {
       state.shadows = [...state.shadows, action.payload];
     },
-    addFloors: (state, action: PayloadAction<FloorType[]>) => {
+    addFloors: (state, action: PayloadAction<FloorSimpleType[]>) => {
       state.floors = [...state.floors, ...action.payload];
     },
-    setFloors: (state, action: PayloadAction<FloorType[]>) => {
+    setFloors: (state, action: PayloadAction<FloorSimpleType[]>) => {
       state.floors = action.payload;
     },
     removeShadow: (state, action: PayloadAction<number>) => {

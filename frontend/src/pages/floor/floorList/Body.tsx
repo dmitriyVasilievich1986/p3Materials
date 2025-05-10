@@ -4,7 +4,7 @@ import * as style from "./style.scss";
 import { Flex, Table, TableColumnsType } from "antd";
 import { useNavigate, useSearchParams } from "react-router";
 
-import type { FloorType } from "../../../reducers/types";
+import type { FloorSimpleType } from "../../../reducers/types";
 import { PagesUrls } from "../../../constants";
 
 import classnames from "classnames/bind";
@@ -12,7 +12,7 @@ import { useFloorsCaller } from "../../../reducers/hooks";
 
 const cx = classnames.bind(style);
 
-const columns: TableColumnsType<FloorType> = [
+const columns: TableColumnsType<FloorSimpleType> = [
   {
     title: "ID",
     dataIndex: "id",
@@ -51,7 +51,7 @@ function Body() {
   return (
     <div className={cx("shadow-list-body-container")}>
       <Flex justify="center" className={cx("row")}>
-        <Table<FloorType>
+        <Table<FloorSimpleType>
           dataSource={materialsForData()}
           style={{ width: "90%" }}
           columns={columns}

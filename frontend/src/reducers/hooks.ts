@@ -1,6 +1,6 @@
 import {
   CraftSimpleType,
-  FloorType,
+  FloorSimpleType,
   MaterialSimpleType,
   ShadowSimpleType,
 } from "./types";
@@ -45,7 +45,7 @@ export function useFloorsCaller() {
     }
     axios
       .get(APIUrls.floorSimple.url)
-      .then((response: { data: { result: FloorType[] } }) => {
+      .then((response: { data: { result: FloorSimpleType[] } }) => {
         dispatch(setFloors(response.data.result));
       });
   };

@@ -1,8 +1,8 @@
-export type FloorType = {
+export type FloorSimpleType = {
   id: number;
 };
 
-export type FloorFullType<S = number> = {
+export type FloorType<S = number> = {
   id?: number;
   shadows: S[];
 };
@@ -39,7 +39,7 @@ export type ShadowSliceInitialStateType = {
   shadow: ShadowType | null;
   arcanas: ArcanaType[];
   damageModifiers: string[];
-  floors: FloorType[];
+  floors: FloorSimpleType[];
 };
 
 export type MaterialSimpleType = {
