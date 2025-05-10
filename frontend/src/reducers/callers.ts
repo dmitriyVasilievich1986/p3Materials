@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../constants";
 import { RootState } from "../store";
-import { ShadowSimpleType } from "./types";
+import { FloorType, ShadowSimpleType } from "./types";
 
 import axios from "axios";
-import { setShadows } from "./shadowSlice";
+import { setFloors, setShadows } from "./shadowSlice";
 
 export function shadowsCaller() {
   const dispatch = useDispatch();
@@ -24,4 +24,23 @@ export function shadowsCaller() {
   };
 
   return [shadows, fillShadows] as const;
+}
+
+export function floorsCaller() {
+  const dispatch = useDispatch();
+
+  const floors = useSelector((state: RootState) => state.shadow.floors);
+
+  const fillFloors = () => {
+    if (floors.length > 0) {
+      return;
+    }
+    axios
+      .get(APIUrls.floorSimple.url)
+      .then((response: { data: { result: FloorType[] } }) => {
+        dispatch(setFloors(response.data.result));
+      });
+  };
+
+  return [floors, fillFloors] as const;
 }
