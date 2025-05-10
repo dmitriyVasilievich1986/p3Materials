@@ -13,6 +13,10 @@ export const APIUrls: { [key: string]: APIUrlsType } = {
     name: "shadow",
     url: "/api/v1/shadow/",
   },
+  shadowSimple: {
+    name: "shadow",
+    url: "/api/v1/shadow/simple",
+  },
   damageMultiplier: {
     name: "damageMultiplier",
     url: "/api/v1/shadow/damage_multiplier",
@@ -25,9 +29,17 @@ export const APIUrls: { [key: string]: APIUrlsType } = {
     name: "floor",
     url: "/api/v1/floor/",
   },
+  floorSimple: {
+    name: "floor",
+    url: "/api/v1/floor/simple",
+  },
   material: {
     name: "material",
     url: "/api/v1/material/",
+  },
+  materialSimple: {
+    name: "material",
+    url: "/api/v1/material/simple",
   },
 };
 
@@ -53,5 +65,21 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
     label: "Shadow",
     name: "shadow",
     url: "/shadow/create",
+  },
+  materialList: {
+    label: "Material",
+    name: "material",
+    url: "/material/",
+    isNavigation: true,
+  },
+  material: {
+    label: "Material",
+    name: "material",
+    url: "/material/",
+  },
+  materialCreate: {
+    label: "Material",
+    name: "material",
+    url: "/material/create",
   },
 };

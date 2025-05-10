@@ -36,3 +36,21 @@ export type ShadowSliceInitialStateType = {
   damageModifiers: string[];
   floors: FloorType[];
 };
+
+export type MaterialSimpleType = {
+  id: number;
+  name: string;
+};
+
+export type MaterialType<S = number, C = number> = {
+  id?: number;
+  name: string;
+  price: number;
+  crafts: C[];
+  shadows: S[];
+};
+
+export type MaterialSliceInitialStateType = {
+  materials: MaterialSimpleType[];
+  material: MaterialType | null;
+};

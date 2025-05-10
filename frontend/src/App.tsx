@@ -4,6 +4,7 @@ import * as style from "./style.scss";
 import { Flex, Layout } from "antd";
 import { Route, Routes } from "react-router";
 import { ShadowForm, ShadowsList } from "./pages/shadow";
+import { MaterialForm, MaterialList } from "./pages/material";
 
 import { Breadcrumb } from "./components/breadcrumb";
 import { Navbar } from "./components/navbar";
@@ -29,6 +30,11 @@ function App() {
                 <Route index element={<ShadowsList />} />
                 <Route path="create" element={<ShadowForm />} />
                 <Route path=":shadowId" element={<ShadowForm />} />
+              </Route>
+              <Route path="/material">
+                <Route index element={<MaterialList />} />
+                <Route path="create" element={<MaterialForm />} />
+                <Route path=":materialId" element={<MaterialForm />} />
               </Route>
             </Routes>
           </div>

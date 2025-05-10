@@ -1,11 +1,13 @@
+import { FloorType, MaterialSimpleType, ShadowSimpleType } from "./types";
+
+import { setFloors, setShadows } from "./shadowSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { APIUrls } from "../constants";
 import { RootState } from "../store";
-import { ShadowSimpleType } from "./types";
 
 import axios from "axios";
-import { setShadows } from "./shadowSlice";
+import { setMaterials } from "./materialSlice";
 
 export function shadowsCaller() {
   const dispatch = useDispatch();
@@ -24,4 +26,42 @@ export function shadowsCaller() {
   };
 
   return [shadows, fillShadows] as const;
+}
+
+export function floorsCaller() {
+  const dispatch = useDispatch();
+
+  const floors = useSelector((state: RootState) => state.shadow.floors);
+
+  const fillFloors = () => {
+    if (floors.length > 0) {
+      return;
+    }
+    axios
+      .get(APIUrls.floorSimple.url)
+      .then((response: { data: { result: FloorType[] } }) => {
+        dispatch(setFloors(response.data.result));
+      });
+  };
+
+  return [floors, fillFloors] as const;
+}
+
+export function materialCaller() {
+  const dispatch = useDispatch();
+
+  const materials = useSelector((state: RootState) => state.material.materials);
+
+  const fillMaterials = () => {
+    if (materials.length > 0) {
+      return;
+    }
+    axios
+      .get(APIUrls.materialSimple.url)
+      .then((response: { data: { result: MaterialSimpleType[] } }) => {
+        dispatch(setMaterials(response.data.result));
+      });
+  };
+
+  return [materials, fillMaterials] as const;
 }

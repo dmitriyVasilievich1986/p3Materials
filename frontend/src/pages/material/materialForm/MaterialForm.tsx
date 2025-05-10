@@ -1,0 +1,131 @@
+import * as React from "react";
+import * as style from "./style.scss";
+
+import { APIUrls, PagesUrls } from "../../../constants";
+import { Button, Card, Flex, Form, Space } from "antd";
+import type { MaterialType, ShadowType } from "../../../reducers/types";
+
+import { addMaterial, updateMaterial } from "../../../reducers/materialSlice";
+import { useNavigate, useParams } from "react-router";
+
+import MainDetails from "./MainDetails";
+
+import axios from "axios";
+import classnames from "classnames/bind";
+import { useDispatch } from "react-redux";
+
+const cx = classnames.bind(style);
+
+function MaterialForm() {
+  const params = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [form] = Form.useForm<MaterialType>();
+
+  const [currentMaterial, setCurrentMaterial] =
+    React.useState<MaterialType | null>(null);
+
+  const getMaterial = () => {
+    axios
+      .get(`${APIUrls.material.url}${params.materialId}`)
+      .then((response: { data: { result: MaterialType<ShadowType> } }) => {
+        const shadows = response.data.result.shadows.map((s) => s.id);
+        setCurrentMaterial({ ...response.data.result, shadows });
+      });
+  };
+
+  React.useEffect(() => {
+    if (params.materialId) {
+      getMaterial();
+    }
+  }, [params]);
+
+  const putHandler = (data: MaterialType, id: number) => {
+    axios
+      .put(`${APIUrls.material.url}${id}`, data)
+      .then((response: { data: { result: MaterialType } }) => {
+        const updated = response.data.result;
+        setCurrentMaterial(updated);
+        dispatch(updateMaterial({ id: updated.id, name: updated.name }));
+      });
+  };
+
+  const postHandler = (data: MaterialType) => {
+    axios
+      .post(APIUrls.material.url, data)
+      .then((response: { data: { id: number; result: MaterialType } }) => {
+        const newMaterial = response.data.result;
+        dispatch(addMaterial({ id: response.data.id, name: newMaterial.name }));
+        navigate(`${PagesUrls.material.url}${response.data.id}`);
+      });
+  };
+
+  const onFinish = (values: MaterialType) => {
+    const id = values.id;
+    delete values.id;
+    if (!id) {
+      postHandler(values);
+    } else {
+      putHandler(values, id);
+    }
+  };
+
+  if (!currentMaterial && !!params.materialId) return null;
+  return (
+    <Flex justify="center" className={cx("shadow-form-container")}>
+      <Card
+        variant="outlined"
+        loading={!currentMaterial && !!params.materialId}
+        style={{ maxWidth: "700px" }}
+      >
+        <Form
+          form={form}
+          name="basic"
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 18 }}
+          onFinish={onFinish}
+          autoComplete="off"
+          initialValues={{
+            id: params?.materialId,
+            name: currentMaterial?.name ?? "",
+            price: currentMaterial?.price ?? "",
+            shadows: currentMaterial?.shadows ?? [],
+          }}
+        >
+          <MainDetails />
+
+          <Space>
+            {params.materialId && (
+              <Form.Item label={null}>
+                <Button
+                  color="purple"
+                  variant="solid"
+                  onClick={() => {
+                    form.setFieldsValue({ id: parseInt(params.materialId) });
+                    form.submit();
+                  }}
+                >
+                  Update
+                </Button>
+              </Form.Item>
+            )}
+
+            <Form.Item label={null}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  form.setFieldsValue({ id: undefined });
+                  form.submit();
+                }}
+              >
+                Create
+              </Button>
+            </Form.Item>
+          </Space>
+        </Form>
+      </Card>
+    </Flex>
+  );
+}
+
+export default MaterialForm;

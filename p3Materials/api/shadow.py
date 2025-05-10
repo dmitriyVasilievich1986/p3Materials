@@ -19,15 +19,24 @@ class ShadowSimple(Schema):
     name = fields.String()
 
 
+class FloorSimple(Schema):
+    id = fields.Int()
+
+
 class FloorModelApi(ModelRestApi):
     resource_name = "floor"
     datamodel: SQLAInterface = SQLAInterface(Floor)
     allow_browser_login = True
-    include_route_methods = {"get_list"}
+    include_route_methods = {"get_list", "get_simple"}
 
     list_columns = [
         Floor.id.key,
     ]
+
+    @expose("/simple", methods=["GET"])
+    def get_simple(self) -> dict[str, list[str]]:
+        floors = self.datamodel.session.query(Floor.id).all()
+        return {API_RESULT_RES_KEY: FloorSimple().dump(floors, many=True)}
 
 
 class ShadowModelApi(ModelRestApi):
