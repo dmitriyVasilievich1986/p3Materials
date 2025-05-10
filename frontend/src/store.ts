@@ -1,9 +1,11 @@
-import { shadowSlice } from "./reducers/shadowSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import { materialSlice } from "./reducers/materialSlice";
+import { shadowSlice } from "./reducers/shadowSlice";
 
 export const store = configureStore({
   reducer: {
     shadow: shadowSlice.reducer,
+    material: materialSlice.reducer,
   },
 });
 
