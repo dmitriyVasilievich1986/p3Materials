@@ -2,9 +2,9 @@ import * as React from "react";
 import * as style from "./style.scss";
 
 import { Flex, Layout } from "antd";
+import { MaterialForm, MaterialList } from "./pages/material";
 import { Route, Routes } from "react-router";
 import { ShadowForm, ShadowsList } from "./pages/shadow";
-import { MaterialForm, MaterialList } from "./pages/material";
 
 import { Breadcrumb } from "./components/breadcrumb";
 import { Navbar } from "./components/navbar";
