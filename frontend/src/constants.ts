@@ -64,8 +64,8 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
   },
   shadowList: {
     label: "Shadow",
-    name: "shadow",
-    url: "/shadow/",
+    name: "shadowList",
+    url: "/shadow/list",
     isNavigation: true,
   },
   shadow: {
@@ -75,13 +75,13 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
   },
   shadowCreate: {
     label: "Shadow",
-    name: "shadow",
+    name: "shadowCreate",
     url: "/shadow/create",
   },
   floorList: {
     label: "Floor",
-    name: "floor",
-    url: "/floor/",
+    name: "floorList",
+    url: "/floor/list",
     isNavigation: true,
   },
   floor: {
@@ -91,8 +91,8 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
   },
   materialList: {
     label: "Material",
-    name: "material",
-    url: "/material/",
+    name: "materialList",
+    url: "/material/list",
     isNavigation: true,
   },
   material: {
@@ -102,13 +102,13 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
   },
   materialCreate: {
     label: "Material",
-    name: "material",
+    name: "materialCreate",
     url: "/material/create",
   },
   craftList: {
     label: "Craft",
-    name: "craft",
-    url: "/craft/",
+    name: "craftList",
+    url: "/craft/list",
     isNavigation: true,
   },
   craft: {
@@ -118,7 +118,7 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
   },
   craftCreate: {
     label: "Craft",
-    name: "craft",
+    name: "craftCreate",
     url: "/craft/create",
   },
 };

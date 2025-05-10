@@ -32,7 +32,7 @@ function App() {
             <Routes>
               <Route path="/" element={<div>Home</div>} />
               <Route path="/shadow">
-                <Route index element={<ShadowsList />} />
+                <Route path="list" element={<ShadowsList />} />
                 <Route
                   path="create"
                   element={<ShadowForm messageApi={messageApi} />}
@@ -43,7 +43,7 @@ function App() {
                 />
               </Route>
               <Route path="/material">
-                <Route index element={<MaterialList />} />
+                <Route path="list" element={<MaterialList />} />
                 <Route
                   path="create"
                   element={<MaterialForm messageApi={messageApi} />}
@@ -54,7 +54,7 @@ function App() {
                 />
               </Route>
               <Route path="/craft">
-                <Route index element={<CraftList />} />
+                <Route path="list" element={<CraftList />} />
                 <Route
                   path="create"
                   element={<CraftForm messageApi={messageApi} />}
@@ -65,7 +65,7 @@ function App() {
                 />
               </Route>
               <Route path="/floor">
-                <Route index element={<FloorList />} />
+                <Route path="list" element={<FloorList />} />
                 <Route
                   path=":floorId"
                   element={<FloorForm messageApi={messageApi} />}
