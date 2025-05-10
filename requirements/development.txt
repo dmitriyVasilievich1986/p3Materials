@@ -30,7 +30,7 @@ pip-compile-multi==3.0.0
     # via -r requirements/development.in
 pip-tools==7.4.1
     # via pip-compile-multi
-platformdirs==4.3.7
+platformdirs==4.3.8
     # via virtualenv
 pluggy==1.5.0
     # via pytest
@@ -51,11 +51,11 @@ pytest-dotenv==0.5.2
     # via -r requirements/development.in
 python-dotenv==1.1.0
     # via pytest-dotenv
-ruff==0.11.8
+ruff==0.11.9
     # via -r requirements/development.in
 toposort==1.10
     # via pip-compile-multi
-virtualenv==20.31.0
+virtualenv==20.31.2
     # via pre-commit
 wheel==0.45.1
     # via pip-tools
