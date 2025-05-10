@@ -41,6 +41,18 @@ export const APIUrls: { [key: string]: APIUrlsType } = {
     name: "material",
     url: "/api/v1/material/simple",
   },
+  craft: {
+    name: "craft",
+    url: "/api/v1/craft/",
+  },
+  craftSimple: {
+    name: "craftSimple",
+    url: "/api/v1/craft/simple",
+  },
+  craftTypes: {
+    name: "craftTypes",
+    url: "/api/v1/craft/types",
+  },
 };
 
 export const PagesUrls: { [key: string]: PagesUrlsType } = {
@@ -81,5 +93,21 @@ export const PagesUrls: { [key: string]: PagesUrlsType } = {
     label: "Material",
     name: "material",
     url: "/material/create",
+  },
+  craftList: {
+    label: "Craft",
+    name: "craft",
+    url: "/craft/",
+    isNavigation: true,
+  },
+  craft: {
+    label: "Craft",
+    name: "craft",
+    url: "/craft/",
+  },
+  craftCreate: {
+    label: "Craft",
+    name: "craft",
+    url: "/craft/create",
   },
 };

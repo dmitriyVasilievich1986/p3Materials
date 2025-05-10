@@ -54,3 +54,24 @@ export type MaterialSliceInitialStateType = {
   materials: MaterialSimpleType[];
   material: MaterialType | null;
 };
+
+export type CraftSimpleType = {
+  id: number;
+  name: string;
+};
+
+export type CraftType<M = number> = {
+  id?: number;
+  name: string;
+  description: string;
+  buff: string;
+  stats: string;
+  type: string;
+  materials: M[];
+};
+
+export type CraftSliceInitialStateType = {
+  crafts: CraftSimpleType[];
+  craft: CraftType | null;
+  types: string[];
+};

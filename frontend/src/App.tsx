@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as style from "./style.scss";
 
+import { CraftForm, CraftList } from "./pages/craft";
 import { Flex, Layout, message } from "antd";
 import { MaterialForm, MaterialList } from "./pages/material";
 import { Route, Routes } from "react-router";
@@ -49,6 +50,17 @@ function App() {
                 <Route
                   path=":materialId"
                   element={<MaterialForm messageApi={messageApi} />}
+                />
+              </Route>
+              <Route path="/craft">
+                <Route index element={<CraftList />} />
+                <Route
+                  path="create"
+                  element={<CraftForm messageApi={messageApi} />}
+                />
+                <Route
+                  path=":craftId"
+                  element={<CraftForm messageApi={messageApi} />}
                 />
               </Route>
             </Routes>

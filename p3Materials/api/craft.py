@@ -1,7 +1,15 @@
-from flask_appbuilder.api import ModelRestApi
+from flask_appbuilder.api import expose, ModelRestApi
+from flask_appbuilder.const import API_RESULT_RES_KEY
 from flask_appbuilder.models.sqla.interface import SQLAInterface
+from marshmallow import fields, Schema
 
+from p3Materials.constants import CraftType
 from p3Materials.models.craft import Craft
+
+
+class CraftSimple(Schema):
+    id = fields.Int()
+    name = fields.String()
 
 
 class CraftModelApi(ModelRestApi):
@@ -41,3 +49,12 @@ class CraftModelApi(ModelRestApi):
         Craft.type.key,
         Craft.materials.key,
     ]
+
+    @expose("/simple", methods=["GET"])
+    def get_simple(self) -> dict[str, list[str]]:
+        crafts = self.datamodel.session.query(Craft.id, Craft.name).all()
+        return {API_RESULT_RES_KEY: CraftSimple().dump(crafts, many=True)}
+
+    @expose("/types", methods=["GET"])
+    def types(self) -> dict[str, list[str]]:
+        return {API_RESULT_RES_KEY: [x.value for x in CraftType.__members__.values()]}
