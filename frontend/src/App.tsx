@@ -3,6 +3,7 @@ import * as style from "./style.scss";
 
 import { CraftForm, CraftList } from "./pages/craft";
 import { Flex, Layout, message } from "antd";
+import { FloorForm, FloorList } from "./pages/floor";
 import { MaterialForm, MaterialList } from "./pages/material";
 import { Route, Routes } from "react-router";
 import { ShadowForm, ShadowsList } from "./pages/shadow";
@@ -61,6 +62,13 @@ function App() {
                 <Route
                   path=":craftId"
                   element={<CraftForm messageApi={messageApi} />}
+                />
+              </Route>
+              <Route path="/floor">
+                <Route index element={<FloorList />} />
+                <Route
+                  path=":floorId"
+                  element={<FloorForm messageApi={messageApi} />}
                 />
               </Route>
             </Routes>
