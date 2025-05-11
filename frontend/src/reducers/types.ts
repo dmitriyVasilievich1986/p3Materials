@@ -17,7 +17,7 @@ export type ShadowSimpleType = {
   name: string;
 };
 
-export type ShadowType<F = number> = {
+export type ShadowType<F = number, M = number> = {
   id?: number;
   name: string;
   stats: string;
@@ -32,6 +32,7 @@ export type ShadowType<F = number> = {
   light: string;
   darkness: string;
   floors?: F[];
+  materials?: M[];
 };
 
 export type ShadowSliceInitialStateType = {

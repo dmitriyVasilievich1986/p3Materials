@@ -3,13 +3,17 @@ import * as style from "./style.scss";
 
 import { APIUrls, PagesUrls } from "../../../constants";
 import { Button, Card, Flex, Form, Space } from "antd";
+import type {
+  FloorSimpleType,
+  MaterialSimpleType,
+  ShadowType,
+} from "../../../reducers/types";
 
 import { addShadow, updateShadow } from "../../../reducers/shadowSlice";
 import { useNavigate, useParams } from "react-router";
 
 import MainDetails from "./MainDetails";
 import { MessageInstance } from "antd/es/message/interface";
-import type { ShadowType } from "../../../reducers/types";
 import Weakneses from "./Weakneses";
 
 import axios from "axios";
@@ -31,10 +35,19 @@ function ShadowForm(props: { messageApi: MessageInstance }) {
   const getShadow = () => {
     axios
       .get(`${APIUrls.shadow.url}${params.shadowId}`)
-      .then((response: { data: { result: ShadowType<{ id: number }> } }) => {
-        const newFloors = response.data.result.floors.map((f) => f.id);
-        setCurrentShadow({ ...response.data.result, floors: newFloors });
-      });
+      .then(
+        (response: {
+          data: { result: ShadowType<FloorSimpleType, MaterialSimpleType> };
+        }) => {
+          const newFloors = response.data.result.floors.map((f) => f.id);
+          const newMaterials = response.data.result.materials.map((m) => m.id);
+          setCurrentShadow({
+            ...response.data.result,
+            floors: newFloors,
+            materials: newMaterials,
+          });
+        }
+      );
   };
 
   React.useEffect(() => {
@@ -101,6 +114,7 @@ function ShadowForm(props: { messageApi: MessageInstance }) {
               stats: currentShadow?.stats ?? "Lvl 0, HP 0, SP 0",
               arcana: currentShadow?.arcana ?? 0,
               floors: currentShadow?.floors ?? [],
+              materials: currentShadow?.materials ?? [],
               slash: currentShadow?.slash ?? "Normal",
               strike: currentShadow?.strike ?? "Normal",
               pierce: currentShadow?.pierce ?? "Normal",
