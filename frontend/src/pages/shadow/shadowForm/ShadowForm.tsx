@@ -63,7 +63,7 @@ function ShadowForm(props: { messageApi: MessageInstance }) {
         const updated = response.data.result;
         setCurrentShadow(updated);
         props.messageApi.success("Shadow updated successfully");
-        dispatch(updateShadow({ id: updated.id, name: updated.name }));
+        dispatch(updateShadow({ id: id, name: updated.name }));
       })
       .catch((error) => {
         props.messageApi.error("Error updating shadow");
