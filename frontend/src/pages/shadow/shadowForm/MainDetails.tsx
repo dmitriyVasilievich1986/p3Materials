@@ -49,13 +49,17 @@ function MainDetails() {
 
       <Form.Item<ShadowType> label="Arcana" name="arcana">
         <Select
-          options={arcanas.map((a) => ({ label: a.name, value: a.id }))}
+          options={arcanas.map((a) => ({
+            label: a.name,
+            value: a.id,
+            key: a.id,
+          }))}
         />
       </Form.Item>
 
       <Form.Item<ShadowType> label="Floors" name="floors">
         <Select
-          options={floors.map((f) => ({ label: f.id, value: f.id }))}
+          options={floors.map((f) => ({ label: f.id, value: f.id, key: f.id }))}
           onOpenChange={fillFloors}
           maxTagCount={5}
           mode="multiple"
