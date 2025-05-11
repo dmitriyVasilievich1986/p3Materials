@@ -52,6 +52,13 @@ Available options:
 
 #### Use Web Server
 
+Initialize
+
+```sh
+p3Materials db upgrade
+p3Materials fab create-admin
+```
+
 ```sh
 p3Materials run
 ```

@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import TYPE_CHECKING
 
 import click
 from sqlalchemy.orm import Session
@@ -6,14 +7,13 @@ from sqlalchemy.sql.expression import and_, true
 
 from p3Materials import db
 from p3Materials.cli.main import main
-from p3Materials.models import (
-    Craft,
-    floor_shadow_table,
-    Material,
-    material_craft_table,
-    material_shadow_table,
-    Shadow,
-)
+
+if TYPE_CHECKING:
+    from p3Materials.models import (
+        Craft,
+        Material,
+        Shadow,
+    )
 
 
 class Objects(Enum):
@@ -24,7 +24,12 @@ class Objects(Enum):
 
 def get_shadows(
     session: Session, floors: tuple[int], names: tuple[str]
-) -> list[Shadow]:
+) -> list["Shadow"]:
+    from p3Materials.models import (
+        floor_shadow_table,
+        Shadow,
+    )
+
     shadows = (
         session.query(Shadow)
         .join(floor_shadow_table, Shadow.id == floor_shadow_table.c.shadow_id)
@@ -41,7 +46,14 @@ def get_shadows(
 
 def get_materials(
     session: Session, floors: tuple[int], names: tuple[str]
-) -> list[Material]:
+) -> list["Material"]:
+    from p3Materials.models import (
+        floor_shadow_table,
+        Material,
+        material_shadow_table,
+        Shadow,
+    )
+
     materials = (
         session.query(Material)
         .join(material_shadow_table, Material.id == material_shadow_table.c.material_id)
@@ -63,7 +75,18 @@ def get_materials(
     return materials
 
 
-def get_crafts(session: Session, floors: tuple[int], names: tuple[str]) -> list[Craft]:
+def get_crafts(
+    session: Session, floors: tuple[int], names: tuple[str]
+) -> list["Craft"]:
+    from p3Materials.models import (
+        Craft,
+        floor_shadow_table,
+        Material,
+        material_craft_table,
+        material_shadow_table,
+        Shadow,
+    )
+
     crafts = (
         session.query(Craft)
         .join(
@@ -123,6 +146,8 @@ def p3m(object: str, floors: tuple[int], names: tuple[str]) -> None:
     """
     Handles the processing and display of objects, materials, and crafts based on the provided parameters.
     """
+
+    from p3Materials.models import material_craft_table
 
     session = db.session
 

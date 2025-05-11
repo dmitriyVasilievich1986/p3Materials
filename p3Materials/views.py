@@ -12,7 +12,7 @@ class ShadowView(BaseView):
     @expose("/")
     @expose("/create")
     @expose("/<int:pk>")
-    def shadow(self, pk: int | None = None) -> str:
+    def shadow_view(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
 
 
@@ -23,7 +23,7 @@ class MaterialView(BaseView):
     @expose("/")
     @expose("/create")
     @expose("/<int:pk>")
-    def material(self, pk: int | None = None) -> str:
+    def material_view(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
 
 
@@ -34,7 +34,7 @@ class CraftView(BaseView):
     @expose("/")
     @expose("/create")
     @expose("/<int:pk>")
-    def craft(self, pk: int | None = None) -> str:
+    def craft_view(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
 
 
@@ -44,5 +44,5 @@ class FloorView(BaseView):
 
     @expose("/")
     @expose("/<int:pk>")
-    def craft(self, pk: int | None = None) -> str:
+    def floor_view(self, pk: int | None = None) -> str:
         return self.render_template("index.html", appbuilder=self.appbuilder)
