@@ -32,4 +32,4 @@ class Arcanas(Enum):
     Hermit = 9
     Fortune = 10
     Strength = 11
-    Hanged = 11
+    Hanged = 12
