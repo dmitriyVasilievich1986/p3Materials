@@ -101,10 +101,29 @@ def get_crafts(session: Session, floors: tuple[int], names: tuple[str]) -> list[
     "-O",
     type=click.Choice([str(x) for x in Objects.__members__], case_sensitive=False),
     default=Objects.Shadow.value,
+    help='the name of the object for which you want to get information. Choices: [material|shadow|craft]. Default: "shadow"',
 )
-@click.option("--floors", "-F", type=int, multiple=True, required=False)
-@click.option("--names", "-N", type=str, multiple=True, required=False)
+@click.option(
+    "--floors",
+    "-F",
+    type=int,
+    multiple=True,
+    required=False,
+    help="you can filter the result by specifying floors.",
+)
+@click.option(
+    "--names",
+    "-N",
+    type=str,
+    multiple=True,
+    required=False,
+    help="you can filter the result by specifying names.",
+)
 def p3m(object: str, floors: tuple[int], names: tuple[str]) -> None:
+    """
+    Handles the processing and display of objects, materials, and crafts based on the provided parameters.
+    """
+
     session = db.session
 
     match object:
