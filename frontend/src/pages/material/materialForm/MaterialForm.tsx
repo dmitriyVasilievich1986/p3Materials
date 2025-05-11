@@ -3,7 +3,11 @@ import * as style from "./style.scss";
 
 import { APIUrls, PagesUrls } from "../../../constants";
 import { Button, Card, Flex, Form, Space } from "antd";
-import type { MaterialType, ShadowType } from "../../../reducers/types";
+import type {
+  CraftType,
+  MaterialType,
+  ShadowType,
+} from "../../../reducers/types";
 
 import { addMaterial, updateMaterial } from "../../../reducers/materialSlice";
 import { useNavigate, useParams } from "react-router";
@@ -29,10 +33,15 @@ function MaterialForm(props: { messageApi: MessageInstance }) {
   const getMaterial = () => {
     axios
       .get(`${APIUrls.material.url}${params.materialId}`)
-      .then((response: { data: { result: MaterialType<ShadowType> } }) => {
-        const shadows = response.data.result.shadows.map((s) => s.id);
-        setCurrentMaterial({ ...response.data.result, shadows });
-      });
+      .then(
+        (response: {
+          data: { result: MaterialType<ShadowType, CraftType> };
+        }) => {
+          const shadows = response.data.result.shadows.map((s) => s.id);
+          const crafts = response.data.result.crafts.map((c) => c.id);
+          setCurrentMaterial({ ...response.data.result, shadows, crafts });
+        }
+      );
   };
 
   React.useEffect(() => {
@@ -100,6 +109,7 @@ function MaterialForm(props: { messageApi: MessageInstance }) {
             id: params?.materialId,
             name: currentMaterial?.name ?? "",
             price: currentMaterial?.price ?? "",
+            crafts: currentMaterial?.crafts ?? [],
             shadows: currentMaterial?.shadows ?? [],
           }}
         >

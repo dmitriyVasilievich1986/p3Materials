@@ -2,15 +2,17 @@ import * as React from "react";
 
 import { Divider, Form, Input, Select } from "antd";
 
-import type { MaterialType } from "../../../reducers/types";
+import { useCraftCaller, useShadowCaller } from "../../../reducers/hooks";
 
-import { useShadowCaller } from "../../../reducers/hooks";
+import type { MaterialType } from "../../../reducers/types";
 
 function MainDetails() {
   const [shadows, fillShadows] = useShadowCaller();
+  const [crafts, fillCrafts] = useCraftCaller();
 
   React.useEffect(() => {
     fillShadows();
+    fillCrafts();
   }, []);
 
   return (
@@ -39,6 +41,19 @@ function MainDetails() {
             label: s.name,
             value: s.id,
             key: s.id,
+          }))}
+          optionFilterProp="label"
+          maxTagCount={6}
+          mode="multiple"
+        />
+      </Form.Item>
+
+      <Form.Item<MaterialType> label="Crafts" name="crafts">
+        <Select
+          options={crafts.map((c) => ({
+            label: c.name,
+            value: c.id,
+            key: c.id,
           }))}
           optionFilterProp="label"
           maxTagCount={6}
