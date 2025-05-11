@@ -15,7 +15,18 @@ The application works in the format of a command line and a web server with a fr
 git clone git@github.com:dmitriyVasilievich1986/p3Materials.git
 cd p3Materials
 python -m build
+```
+
+And install:
+
+```sh
 pip install ./dist/p3materials-__current_version__-py3-none-any.whl
+```
+
+If you want to work with PostgreSQL database you need to install optional dependecies
+
+```sh
+pip install ./dist/p3materials-__current_version__-py3-none-any.whl[postgres]
 ```
 
 or just:
