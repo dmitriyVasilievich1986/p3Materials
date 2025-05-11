@@ -49,7 +49,7 @@ function CraftForm(props: { messageApi: MessageInstance }) {
         const updated = response.data.result;
         setCurrentCraft(updated);
         props.messageApi.success("Craft updated successfully");
-        dispatch(updateCraft({ id: updated.id, name: updated.name }));
+        dispatch(updateCraft({ id: id, name: updated.name }));
       })
       .catch((error) => {
         props.messageApi.error("Error updating craft");

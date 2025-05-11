@@ -57,7 +57,7 @@ function MaterialForm(props: { messageApi: MessageInstance }) {
         const updated = response.data.result;
         setCurrentMaterial(updated);
         props.messageApi.success("Material updated successfully");
-        dispatch(updateMaterial({ id: updated.id, name: updated.name }));
+        dispatch(updateMaterial({ id: id, name: updated.name }));
       })
       .catch((error) => {
         props.messageApi.error("Error updating material");
