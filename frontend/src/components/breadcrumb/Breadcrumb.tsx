@@ -28,7 +28,7 @@ function Breadcrumb() {
     if (isLast) {
       return <span>{props.title}</span>;
     }
-    return <Link to={props!.path}>{props.title}</Link>;
+    return <Link to={`${props!.path}${location.search}`}>{props.title}</Link>;
   }
 
   return (

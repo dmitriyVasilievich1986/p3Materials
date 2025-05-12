@@ -67,7 +67,10 @@ function Body() {
           }}
           onRow={(record) => {
             return {
-              onClick: () => navigate(`${PagesUrls.craft.url}${record.id}`),
+              onClick: () =>
+                navigate(
+                  `${PagesUrls.craft.url}${record.id}${location.search}`
+                ),
             };
           }}
         />

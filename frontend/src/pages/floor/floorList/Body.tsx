@@ -68,7 +68,10 @@ function Body() {
           }}
           onRow={(record) => {
             return {
-              onClick: () => navigate(`${PagesUrls.floor.url}${record.id}`),
+              onClick: () =>
+                navigate(
+                  `${PagesUrls.floor.url}${record.id}${location.search}`
+                ),
             };
           }}
         />
