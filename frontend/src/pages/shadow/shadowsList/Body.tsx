@@ -2,7 +2,7 @@ import * as React from "react";
 import * as style from "./style.scss";
 
 import { Flex, Table, TableColumnsType } from "antd";
-import { useNavigate, useSearchParams } from "react-router";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 
 import { PagesUrls } from "../../../constants";
 import type { ShadowSimpleType } from "../../../reducers/types";
@@ -30,6 +30,7 @@ const columns: TableColumnsType<ShadowSimpleType> = [
 function Body() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [shadows, fillShadows] = useShadowCaller();
 
@@ -67,7 +68,10 @@ function Body() {
           }}
           onRow={(record) => {
             return {
-              onClick: () => navigate(`${PagesUrls.shadow.url}${record.id}`),
+              onClick: () =>
+                navigate(
+                  `${PagesUrls.shadow.url}${record.id}${location.search}`
+                ),
             };
           }}
         />
